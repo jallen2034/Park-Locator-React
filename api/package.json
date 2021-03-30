@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "express": "^4.17.1"
+  },
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.16",
+    "pg-promise": "^10.9.5"
   }
 }
