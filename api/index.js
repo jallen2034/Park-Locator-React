@@ -1,25 +1,20 @@
 const express = require("express");
-const {Client} = require('pg');
+const app = express();
+const {Pool} = require('pg');
 
-// use client
-const client = new Client({
+// https://node-postgres.com/features/connecting
+const db = new Pool({
   user: "postgres",
+  host: "127.0.0.1",
+  database: 'park_locator',
   password: "postgres",
-  host: "jacob-P34V4",
   port: 5432
 });
 
-const app = express();
-const cors = require("cors");
-var pgp = require('pg-promise')(/* options */)
-var db = pgp('postgres://username:password@host:port/database')
+// connect node to pg db
+db.connect();
 
-// https://github.com/googlemaps/google-maps-services-js
-// import {Client} from "@googlemaps/google-maps-services-js";
-
-/* middleware, CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options
- * express.json() allows us to parse json from the client to our back end */
-app.use(cors());
+// middleware. express.json() allows us to parse json from the client to our back end
 app.use(express.json());
 
 // app listener
