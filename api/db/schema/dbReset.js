@@ -14,4 +14,5 @@ module.exports = async () => {
   await db.query(fs.readFileSync('../schema/opening_hours.sql', 'utf8'));
   await db.query(fs.readFileSync('../schema/photos.sql', 'utf8'));
   await db.query(fs.readFileSync('../schema/reviews.sql', 'utf8'));
+  await db.query(fs.readFileSync('../schema/location.sql', 'utf8'));
 }
