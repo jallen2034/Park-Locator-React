@@ -18,9 +18,9 @@
     const query = `
       INSERT INTO all_skateparks(
         place_id,
-        name, 
-        formatted_address, 
-        phone, 
+        name,
+        formatted_address,
+        phone,
         website
       )
       VALUES ($1, $2, $3, $4, $5)
@@ -57,14 +57,14 @@
         ];
         const query = `
           INSERT INTO reviews(
-            place_id, 
-            review_author, 
-            review_author_url, 
+            place_id,
+            review_author,
+            review_author_url,
             review_language,
             review_profile_url,
-            review_rating, 
-            relative_time_desc, 
-            review_text, 
+            review_rating,
+            relative_time_desc,
+            review_text,
             review_time
           )
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
