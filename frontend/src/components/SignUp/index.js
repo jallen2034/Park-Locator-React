@@ -88,10 +88,6 @@ function SignUp() {
               id="confirm_password"
               autoComplete="current-confirm-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth

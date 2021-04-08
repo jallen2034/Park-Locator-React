@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const {db} = require('./db/db')
 
 // middleware. allows us to parse json from client to back end
 app.use(express.json());
