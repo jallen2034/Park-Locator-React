@@ -24,8 +24,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+// helper function to act as the button switcher
+const buttonClick = function (buttonStatus, setRegister, setKey) {
+
+  if (buttonStatus === 'Logout') {
+    setRegister(false)
+    setKey(false)
+  } else if (buttonStatus === 'Login') {
+    setRegister(false)
+  } else if (buttonStatus === 'Register') {
+    setRegister(true)
+  }
+}
+
 // component for our navbar
-function Navbar () {
+function Navbar ({ buttonStatus, setRegister, setKey }) {
   const classes = useStyles()
   return (
     <AppBar position="static">
@@ -33,7 +46,12 @@ function Navbar () {
         <Typography variant="h6" className={classes.title}>
           Park Locator
         </Typography>
-        <Button color="inherit">Login</Button>
+        <Button 
+          color="inherit"
+          onClick={() =>
+            buttonClick(buttonStatus, setRegister, setKey)}
+        >{buttonStatus}
+        </Button>
       </Toolbar>
     </AppBar>
   )
