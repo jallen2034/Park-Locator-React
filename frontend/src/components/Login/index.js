@@ -9,6 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+// helper that can render the register component conditonally when the "need an account?" link is clicked
+const renderRegister = function (event, setRegister) {
+  event.preventDefault()
+  setRegister(true)
+}
+
 // style our component
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignIn () {
+function SignIn ({setRegister}) {
   const classes = useStyles();
 
   return (
@@ -91,13 +97,17 @@ function SignIn () {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link 
+                  onClick={(event) => renderRegister(event, setRegister)}
+                  href="#" 
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

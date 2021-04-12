@@ -7,7 +7,7 @@ import Login from '../Login'
 const Application = () => {
 
   // mock session storage token & register state to test conditional rendering in storybook
-  const [key, setKey] = useState(true)
+  const [key, setKey] = useState(false)
   const [register, setRegister] = useState(false)
 
   if (!key && !register) {
@@ -18,7 +18,7 @@ const Application = () => {
           setRegister={setRegister}
           setKey={setKey}
         />
-        <Login />
+        <Login setRegister={setRegister} />
       </div>
     )
   } else if (!key && register) {
@@ -29,7 +29,7 @@ const Application = () => {
           setRegister={setRegister}
           setKey={setKey}
         />
-        <SignUp />
+        <SignUp setRegister={setRegister}  />
       </div>
     )
   } else {
