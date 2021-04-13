@@ -49,18 +49,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignUp({setRegister}) {
+function SignUp({setRegister, setKey}) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const classes = useStyles();
   
-  // helper callback function that routes to the loginRoute express endpoint to register + log the user in
+  // helper callback routes to the loginRoute express endpoint to register + log the user in automatically
   const RegisterUser = function (event) {
     event.preventDefault()
 
     axios.put("http://localhost:5000/register", {username, password, passwordConfirm})
-    .then((response) => (console.log("response from server: ", response)))
+    .then((response) => {
+      console.log("response", response.data)
+
+      if (response.data) {
+        setKey(true)
+      }
+    })
   }
   
   return (
