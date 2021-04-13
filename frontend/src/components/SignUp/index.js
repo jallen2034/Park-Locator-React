@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 // login component
 function SignUp({setRegister}) {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const classes = useStyles();
@@ -58,13 +58,8 @@ function SignUp({setRegister}) {
   // helper callback function that routes to the loginRoute express endpoint to register + log the user in
   const RegisterUser = function (event) {
     event.preventDefault()
-    console.log(event.target)
-    console.log("called!")
-    console.log("email in state: ", email)
-    console.log("password in state: ", password)
-    console.log("passwordConfirm in state: ", passwordConfirm)
-    
-    axios.put("http://localhost:5000/register", {email, password, passwordConfirm})
+
+    axios.put("http://localhost:5000/register", {username, password, passwordConfirm})
     .then((response) => (console.log("response from server: ", response)))
   }
   
@@ -83,12 +78,12 @@ function SignUp({setRegister}) {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="username"
+              name="username"
+              autoComplete="username"
               onChange={(event) => {
-                setEmail(event.target.value)
+                setUsername(event.target.value)
               }}
               autoFocus
             />
