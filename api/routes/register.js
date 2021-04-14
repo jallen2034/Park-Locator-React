@@ -1,5 +1,5 @@
-const express = require("express");
-const registerRoute = express.Router();
+const express = require("express")
+const registerRoute = express.Router()
 const { userNameExists, addUserToDb } = require('./helpers')
 
 // POST route to handle the user registering for a user - TODO

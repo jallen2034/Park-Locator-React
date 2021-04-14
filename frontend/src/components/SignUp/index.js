@@ -55,16 +55,18 @@ function SignUp({setRegister, setKey}) {
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const classes = useStyles();
   
-  // helper callback routes to the loginRoute express endpoint to register + log the user in automatically
-  const RegisterUser = function (event) {
+  // helper callback routes to the registerRoute express endpoint to register + log the user in automatically
+  const registerUser = function (event) {
     event.preventDefault()
 
-    axios.put("http://localhost:5000/register", {username, password, passwordConfirm})
+    axios.put("http://localhost:5000/register", { username, password, passwordConfirm })
     .then((response) => {
       console.log("response", response.data)
 
       if (response.data) {
         setKey(true)
+      } else {
+        console.log("Oh no, something went wrong!")
       }
     })
   }
@@ -127,7 +129,7 @@ function SignUp({setRegister, setKey}) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={RegisterUser}
+              onClick={registerUser}
             >
               Sign Up
             </Button>

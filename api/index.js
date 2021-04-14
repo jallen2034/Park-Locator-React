@@ -11,13 +11,13 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/* separated Routes for each Resource
- * const loginRoute = require('./routes/login') */
+// separated Routes for each Resource
 const registerRoute = require('./routes/register')
+const loginRoute = require('./routes/login')
 
-/* GET & POST requests here, mount all resource routes
- * app.use("/login", loginRoute); */
+// GET & POST requests here, mount all resource routes
 app.use('/register', registerRoute)
+app.use('/login', loginRoute)
 
 // app listener
 app.listen(5000, () => {
