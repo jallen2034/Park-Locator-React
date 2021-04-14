@@ -35,9 +35,9 @@ registerRoute.put("/", (req, res) => {
 
       if (value) {
         res.send(errors.usernameTaken)
+      } else {
+        return addUserToDb(username, password)
       }
-
-      return addUserToDb(username, password)
     })
     .then((value) => {
       res.send(value)

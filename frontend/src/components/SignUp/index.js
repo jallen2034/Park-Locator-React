@@ -63,7 +63,7 @@ function SignUp({setRegister, setKey}) {
     .then((response) => {
       console.log("response", response.data)
 
-      if (response.data) {
+      if (response.data === true) {
         setKey(true)
       } else {
         console.log("Oh no, something went wrong!")
