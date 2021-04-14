@@ -40,6 +40,7 @@ const addUserToDb = function (username, password) {
     })
     .catch(error => {
       console.log("Error: ", error);
+      return false
     })
 }
 

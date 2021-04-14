@@ -29,7 +29,7 @@ const Application = () => {
           setRegister={setRegister}
           setKey={setKey}
         />
-        <SignUp setRegister={setRegister}  />
+        <SignUp setRegister={setRegister} setKey={setKey} />
       </div>
     )
   } else {
