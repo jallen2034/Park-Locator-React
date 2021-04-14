@@ -4,14 +4,17 @@ const { db } = require('../db/db');
 /* helper to check if a users email address already exists in our database
  * vulnerable to injection - cant get this to work yet without doing this - BAD need to fix! */
 const userNameExists = function (username) {
+  console.log("Username in register route param: ", username)
+  const parameters = [username]
 
   const query = `
     SELECT username
     FROM users
-    WHERE username = '${username}';
+    WHERE username = $1;
   `
 
-  return db.query(query)
+  console.log("parameters: ", parameters)
+  return db.query(query, parameters)
     .then(res => {
       console.log("Sucessful query")
 
@@ -26,21 +29,19 @@ const userNameExists = function (username) {
     })
 }
 
-// helper to validate a user for login - cant get this to work yet without doing this - BAD need to fix!
+/* helper to validate a user for login - cant get this to work yet without doing this - BAD need to fix!
+ * https://node-postgres.com/features/queries#Parameterized%20query */
 const validUsernamePassword = function (username, password) {
-  console.log("HERE")
+  const parameters = [username]
 
   const query = `
     SELECT password
     FROM users
-    WHERE username = '${username}';
+    WHERE username = $1;
   `
 
-  return db.query(query)
+  return db.query(query, parameters)
     .then(res => {
-      console.log("Sucessful query")
-      console.log("res.rows password from db: ", res.rows[0].password)
-      console.log("User typed pw: ", password)
       const passwordFromDb = res.rows[0].password
 
       if (passwordFromDb === password) {
