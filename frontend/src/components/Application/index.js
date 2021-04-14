@@ -18,7 +18,7 @@ const Application = () => {
           setRegister={setRegister}
           setKey={setKey}
         />
-        <Login setRegister={setRegister} />
+        <Login setRegister={setRegister} setKey={setKey} />
       </div>
     )
   } else if (!key && register) {

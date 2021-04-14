@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -48,8 +50,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignIn ({setRegister}) {
+function SignIn ({setRegister, setKey}) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const classes = useStyles();
+
+  // helper callback routes to the loginRoute express endpoint log the user in
+  const loginUser = function (event) {
+    event.preventDefault()
+
+    axios.put("http://localhost:5000/login", { username, password } )
+      .then((response) => {
+        console.log("response", response.data)
+
+        if (response.data === true) {
+          setKey(true)
+        } else {
+          console.log(response.data)
+        }
+      })
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -67,9 +87,12 @@ function SignIn ({setRegister}) {
               required
               fullWidth
               id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              label="username"
+              name="username"
+              autoComplete="username"
+              onChange={(event) => {
+                setUsername(event.target.value)
+              }}
               autoFocus
             />
             <TextField
@@ -82,6 +105,9 @@ function SignIn ({setRegister}) {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(event) => {
+                setPassword(event.target.value)
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -93,6 +119,7 @@ function SignIn ({setRegister}) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={loginUser}
             >
               Sign In
             </Button>
