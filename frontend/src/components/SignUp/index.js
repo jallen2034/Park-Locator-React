@@ -1,13 +1,20 @@
+import { useState } from 'react'
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+// helper that can render the login component conditonally when the "need an account?" link is clicked
+const renderRegister = function (event, setRegister) {
+  event.preventDefault()
+  setRegister(false)
+}
+
 
 // style our component
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'url(https://images.unsplash.com/photo-1536318431364-5cc762cfc8ec?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -42,9 +49,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignUp() {
+function SignUp({setRegister}) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
   const classes = useStyles();
+  
+  // helper callback function that routes to the loginRoute express endpoint to register + log the user in
+  const RegisterUser = function (event) {
+    event.preventDefault()
 
+    axios.put("http://localhost:5000/register", {username, password, passwordConfirm})
+    .then((response) => (console.log("response from server: ", response)))
+  }
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -60,10 +78,13 @@ function SignUp() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="username"
+              name="username"
+              autoComplete="username"
+              onChange={(event) => {
+                setUsername(event.target.value)
+              }}
               autoFocus
             />
             <TextField
@@ -76,6 +97,9 @@ function SignUp() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(event) => {
+                setPassword(event.target.value)
+              }}
             />
             <TextField
               variant="outlined"
@@ -87,6 +111,9 @@ function SignUp() {
               type="confirm_password"
               id="confirm_password"
               autoComplete="current-confirm-password"
+              onChange={(event) => {
+                setPasswordConfirm(event.target.value)
+              }}
             />
             <Button
               type="submit"
@@ -94,12 +121,17 @@ function SignUp() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={RegisterUser}
             >
               Sign Up
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link 
+                  href="#" 
+                  variant="body2"
+                  onClick={(event) => renderRegister(event, setRegister)}
+                >
                   {"Already have an account? Log in"}
                 </Link>
               </Grid>

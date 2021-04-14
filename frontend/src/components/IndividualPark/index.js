@@ -11,12 +11,14 @@ const IndividualReview = ({ review }) => {
   )
 }
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values */
 const IndividualPark = ({ park }) => {
   let individualParkReviews
+  console.log("park: ", park)
   const value = Object.values(park)[0]
+  console.log("value: ", value)
   const parkName = Object.keys(park)[0]
-
   individualParkReviews = value.map((review) => <IndividualReview review={review} id={review.place_id} />)
 
   return (
