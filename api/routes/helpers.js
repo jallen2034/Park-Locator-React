@@ -13,7 +13,6 @@ const userNameExists = function (username) {
     WHERE username = $1;
   `
 
-  console.log("parameters: ", parameters)
   return db.query(query, parameters)
     .then(res => {
       console.log("Sucessful query")
@@ -25,7 +24,7 @@ const userNameExists = function (username) {
       }
     })
     .catch(error => {
-      console.log("Error: ", error);
+      console.log("Error: ", error)
     })
 }
 
