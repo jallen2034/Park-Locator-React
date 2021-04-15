@@ -1,10 +1,10 @@
 // db uses plaintext passwords - BAD! TODO - fix using bcrypt before publishing to production
 const { db } = require('../db/db');
+const bcrypt = require('bcrypt');
 
 /* helper to check if a users email address already exists in our database
  * vulnerable to injection - cant get this to work yet without doing this - BAD need to fix! */
 const userNameExists = function (username) {
-  console.log("Username in register route param: ", username)
   const parameters = [username]
 
   const query = `
@@ -44,7 +44,7 @@ const validUsernamePassword = function (username, password) {
     .then(res => {
       const passwordFromDb = res.rows[0].password
 
-      if (passwordFromDb === password) {
+      if (bcrypt.compareSync(password, passwordFromDb)) {
         return true
       } else {
         return false
@@ -57,7 +57,8 @@ const validUsernamePassword = function (username, password) {
 
 // helper to add a user to the database
 const addUserToDb = function (username, password) {
-  const parameters = [username, password]
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const parameters = [username, hashedPassword]
   const query = `
     INSERT INTO users (username, password) 
     VALUES ($1, $2)

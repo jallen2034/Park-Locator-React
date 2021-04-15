@@ -15,7 +15,6 @@ const renderRegister = function (event, setRegister) {
   setRegister(false)
 }
 
-
 // style our component
 const useStyles = makeStyles((theme) => ({
   root: {
