@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // helper that can render the register component conditonally when the "need an account?" link is clicked
 const renderRegister = function (event, setRegister) {
@@ -61,12 +63,11 @@ function SignIn ({setRegister, setKey}) {
 
     axios.put("http://localhost:5000/login", { username, password } )
       .then((response) => {
-        console.log("response", response.data)
 
         if (response.data === true) {
           setKey(true)
         } else {
-          console.log(response.data)
+          toast.error(response.data)
         }
       })
   }
