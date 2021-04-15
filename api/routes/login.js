@@ -11,9 +11,6 @@ loginRoute.put("/", (req, res) => {
     incorrect: "The username or password is incorrect!"
   }
 
-  console.log("username: ", username)
-  console.log("password: ", password)
-
   /* TODO - refactor into switch statement
   /* https://stackoverflow.com/questions/43772154/how-do-i-break-a-promise-chain */
   if (!username) {
@@ -27,7 +24,6 @@ loginRoute.put("/", (req, res) => {
   let validUsername = userNameExists(username)
   validUsername
     .then((value) => {
-      console.log("value HERE: ", value)
 
       if (value) {
         return validUsernamePassword(username, password) 
@@ -39,7 +35,6 @@ loginRoute.put("/", (req, res) => {
     .then((value) => {
       console.log("value from validUsernamePassword helper: ", value)
       if (value) {
-        console.log("Huuur")
         res.send(value)
       } else {
         res.send(errors.incorrect)
