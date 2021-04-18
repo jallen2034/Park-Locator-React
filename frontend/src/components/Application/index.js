@@ -25,7 +25,7 @@ const Application = () => {
     return (
       <div>
         <Navbar 
-          buttonStatus='Login' 
+          buttonStatus='Login'
           setRegister={setRegister}
           setKey={setKey}
         />

@@ -74,9 +74,29 @@ const addUserToDb = function (username, password) {
     })
 }
 
+// helper to get all reviews for all skateparks from db and pass to client
+const retrieveReviews = function () {
+  const query = `
+    SELECT name, all_skateparks.place_id, review_author, review_rating, review_text 
+    FROM all_skateparks 
+    JOIN reviews 
+    ON all_skateparks.place_id = reviews.place_id;
+  `
+
+  return db.query(query)
+    .then(res => {
+      const skateparkReviews = res.rows
+      return skateparkReviews
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
+}
+
 // export helper functions to be used elsewhere
 module.exports = {
   userNameExists,
   addUserToDb,
-  validUsernamePassword
+  validUsernamePassword,
+  retrieveReviews
 }
