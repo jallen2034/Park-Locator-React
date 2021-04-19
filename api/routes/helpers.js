@@ -93,10 +93,30 @@ const retrieveReviews = function () {
     })
 }
 
+// helper to get all skateparks to display on the map/index page
+const retrieveParksForMap = function() {
+  const query = `
+    SELECT all_skateparks.place_id, name, formatted_address, phone, website, location_lat, location_long
+    FROM all_skateparks
+    JOIN skatepark_location
+    ON all_skateparks.place_id = skatepark_location.place_id;
+  `
+
+  return db.query(query)
+    .then(res => {
+      const skateparkReviews = res.rows
+      return skateparkReviews
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
+}
+
 // export helper functions to be used elsewhere
 module.exports = {
   userNameExists,
   addUserToDb,
   validUsernamePassword,
-  retrieveReviews
+  retrieveReviews,
+  retrieveParksForMap
 }
