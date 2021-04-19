@@ -9,25 +9,31 @@ const Application = () => {
   // mock session storage token & register state to test conditional rendering in storybook
   const [key, setKey] = useState(false)
   const [register, setRegister] = useState(false)
+  const sessionUuid = window.localStorage.getItem('Uuid')
+  const [currentUser, setCurrentUser] = useState({
+    uuid: sessionUuid || null
+  })
 
-  if (!key && !register) {
+  if (!key && !register && !currentUser) {
     return (
       <div>
         <Navbar
           buttonStatus='Register'
           setRegister={setRegister}
           setKey={setKey}
+          setCurrentUser={setCurrentUser}
         />
         <Login setRegister={setRegister} setKey={setKey} />
       </div>
     )
-  } else if (!key && register) {
+  } else if (!key && register && !currentUser) {
     return (
       <div>
         <Navbar 
           buttonStatus='Login'
           setRegister={setRegister}
           setKey={setKey}
+          setCurrentUser={setCurrentUser}
         />
         <SignUp setRegister={setRegister} setKey={setKey} />
       </div>
@@ -39,6 +45,7 @@ const Application = () => {
           buttonStatus='Logout'
           setRegister={setRegister}
           setKey={setKey}
+          setCurrentUser={setCurrentUser}
         />
         <HomePage />
       </div>

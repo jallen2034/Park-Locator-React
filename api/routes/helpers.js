@@ -2,6 +2,20 @@
 const { db } = require('../db/db');
 const bcrypt = require('bcrypt');
 
+/* helper function to generate a 6 char random string, this is not my own implementation, all credit goes to its creator:
+   https://stackoverflow.com/questions/16106701/how-to-generate-a-random-string-of-letters-and-numbers-in-javascript */
+const generateRandomString = function () {
+  const textLen = 6;
+  let text = "";
+  let charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (let i = 0; i < textLen; i++) {
+    text += charset.charAt(Math.floor(Math.random() * charset.length));
+  }
+
+  return text;
+};
+
 /* helper to check if a users email address already exists in our database
  * vulnerable to injection - cant get this to work yet without doing this - BAD need to fix! */
 const userNameExists = function (username) {
@@ -34,7 +48,7 @@ const validUsernamePassword = function (username, password) {
   const parameters = [username]
 
   const query = `
-    SELECT password
+    SELECT password, uuid
     FROM users
     WHERE username = $1;
   `
@@ -42,11 +56,12 @@ const validUsernamePassword = function (username, password) {
   return db.query(query, parameters)
     .then(res => {
       const passwordFromDb = res.rows[0].password
+      const uuid = res.rows[0].uuid
 
       if (bcrypt.compareSync(password, passwordFromDb)) {
-        return true
+        return { true: true, uuid: uuid }
       } else {
-        return false
+        return { false: false }
       }
     })
     .catch(error => {
@@ -56,21 +71,22 @@ const validUsernamePassword = function (username, password) {
 
 // helper to add a user to the database
 const addUserToDb = function (username, password) {
+  const uuid = generateRandomString()
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const parameters = [username, hashedPassword]
+  const parameters = [username, hashedPassword, uuid]
   const query = `
-    INSERT INTO users (username, password) 
-    VALUES ($1, $2)
+    INSERT INTO users (username, password, uuid) 
+    VALUES ($1, $2, $3)
   `
 
   return db.query(query, parameters)
     .then(res => {
       console.log("Sucessful query")
-      return true;
+      return { uuid: uuid, true: true };
     })
     .catch(error => {
       console.log("Error: ", error);
-      return false
+      return { false: false }
     })
 }
 
@@ -94,7 +110,7 @@ const retrieveReviews = function () {
 }
 
 // helper to get all skateparks to display on the map/index page
-const retrieveParksForMap = function() {
+const retrieveParksForMap = function () {
   const query = `
     SELECT all_skateparks.place_id, name, formatted_address, phone, website, location_lat, location_long
     FROM all_skateparks
@@ -104,8 +120,8 @@ const retrieveParksForMap = function() {
 
   return db.query(query)
     .then(res => {
-      const skateparkReviews = res.rows
-      return skateparkReviews
+      const skateparksForMap = res.rows
+      return skateparksForMap
     })
     .catch(error => {
       console.log("Error: ", error)
