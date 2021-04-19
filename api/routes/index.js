@@ -6,6 +6,7 @@ indexRoute.get("/", (req, res) => {
   let skateparkList = retrieveParksForMap()
   skateparkList
   .then((value) => {
+
     if (value) {
       res.send(value)
     } else {

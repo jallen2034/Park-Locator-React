@@ -64,8 +64,9 @@ function SignIn ({setRegister, setKey}) {
     axios.put("http://localhost:5000/login", { username, password } )
       .then((response) => {
 
-        if (response.data === true) {
+        if (response.data.true === true) {
           setKey(true)
+          window.localStorage.setItem('Uuid', response.data.uuid)
         } else {
           toast.error(response.data)
         }

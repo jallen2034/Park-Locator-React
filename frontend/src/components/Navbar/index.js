@@ -21,11 +21,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 // helper function to act as the button switcher
-const buttonClick = function (buttonStatus, setRegister, setKey) {
+const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser) {
 
   if (buttonStatus === 'Logout') {
     setRegister(false)
     setKey(false)
+    setCurrentUser(null)
+    window.localStorage.removeItem('Uuid')
   } else if (buttonStatus === 'Login') {
     setRegister(false)
   } else if (buttonStatus === 'Register') {
@@ -34,7 +36,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey) {
 }
 
 // component for our navbar
-function Navbar ({ buttonStatus, setRegister, setKey }) {
+function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
   const classes = useStyles()
   return (
     <AppBar position="static">
@@ -45,7 +47,7 @@ function Navbar ({ buttonStatus, setRegister, setKey }) {
         <Button 
           color="inherit"
           onClick={() =>
-            buttonClick(buttonStatus, setRegister, setKey)}
+            buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)}
         >{buttonStatus}
         </Button>
       </Toolbar>
