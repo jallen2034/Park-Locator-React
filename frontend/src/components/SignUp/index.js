@@ -62,8 +62,7 @@ function SignUp({setRegister, setKey}) {
 
     axios.put("http://localhost:5000/register", { username, password, passwordConfirm })
     .then((response) => {
-      console.log("Response on register: ", response)
-  
+
       if (response.data.true === true) {
         setKey(true)
         window.localStorage.setItem('Uuid', response.data.uuid)

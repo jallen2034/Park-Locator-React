@@ -128,11 +128,41 @@ const retrieveParksForMap = function () {
     })
 }
 
+/* helper function to retrieve the saved parks for the current user signed in
+ * https://towardsdatascience.com/how-to-solve-the-ambiguous-name-column-error-in-sql-d4c256f3d14c?gi=505204b5446d */
+const usersSavedParks = function (uuid) {
+  console.log(uuid)
+  const parameters = [uuid]
+
+  const query = `
+    SELECT name, formatted_address, phone, website, location_lat, location_long, all_skateparks.place_id 
+    FROM user_saved_parks 
+    JOIN all_skateparks
+    ON user_saved_parks.place_id = all_skateparks.place_id
+    JOIN skatepark_location 
+    ON all_skateparks.place_id = skatepark_location.place_id
+    JOIN users
+    ON user_saved_parks.user_id = users.id
+    WHERE users.uuid = $1;
+  `
+
+  return db.query(query, parameters)
+    .then(res => {
+      const userSavedPakrs = res.rows
+      console.log(userSavedPakrs)
+      return userSavedPakrs
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
+}
+
 // export helper functions to be used elsewhere
 module.exports = {
   userNameExists,
   addUserToDb,
   validUsernamePassword,
   retrieveReviews,
-  retrieveParksForMap
+  retrieveParksForMap,
+  usersSavedParks
 }

@@ -4,15 +4,12 @@ import HomePage from '../HomePage'
 import SignUp from '../SignUp'
 import Login from '../Login'
 
-const Application = () => {
-
-  // mock session storage token & register state to test conditional rendering in storybook
+const Application = ({ currentUser, setCurrentUser }) => {
+ 
+  // session storage token & register state to test conditional rendering in storybook
   const [key, setKey] = useState(false)
   const [register, setRegister] = useState(false)
-  const sessionUuid = window.localStorage.getItem('Uuid')
-  const [currentUser, setCurrentUser] = useState({
-    uuid: sessionUuid || null
-  })
+  console.log("setRegister setter: ", setRegister)
 
   if (!key && !register && !currentUser) {
     return (
