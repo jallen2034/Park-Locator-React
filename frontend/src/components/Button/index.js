@@ -4,11 +4,15 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const addToSavedParks = function(place_id, currentUser) {
-  console.log("Park place id when button clicked", place_id)
+  const error = "Sorry, you already added this saved park!"
   axios.put("http://localhost:5000/addSavedPark", { place_id, currentUser })
   .then((response) => {
-    console.log("response from server with adding a saved park name: ", response.data)
-    toast.success(`${response.data} has been successfully added to your saved parks list!`)
+
+    if (response.data === error) {
+      toast.error(error)
+    } else {
+      toast.success(`${response.data} has been successfully added to your saved parks list!`)
+    }
   })
 }
 

@@ -144,7 +144,6 @@ const usersSavedParks = function (uuid) {
   return db.query(query, parameters)
     .then(res => {
       const userSavedPakrs = res.rows
-      console.log(userSavedPakrs)
       return userSavedPakrs
     })
     .catch(error => {
@@ -178,7 +177,6 @@ const getUserId = function (uuid) {
 
   return db.query(query, parameters)
   .then(res => {
-    console.log(res.rows)
     return res.rows
   })
   .catch(error => {
@@ -193,10 +191,8 @@ const addSavedParkForUser = function (place_id, currentUser) {
     INSERT INTO user_saved_parks (place_id, user_id) 
     VALUES ($1, $2);
   `
-
   return db.query(query, parameters)
   .then(res => {
-    console.log("GOT HERE")
     return "Succesful insert!"
   })
   .catch(error => {
@@ -221,6 +217,31 @@ const deleteSavedParkForUser = function (place_id, currentUser) {
   })
 }
 
+// helper function to check if added park is already in user's saved parks list
+const parkVerification = function (place_id, currentUser) {
+  const parameters = [currentUser[0].id]
+  const query = `
+    SELECT place_id 
+    FROM user_saved_parks
+    WHERE user_id = $1
+  `
+  return db.query(query, parameters)
+  .then(res => {
+    
+    if (res.rows.length === 0) return { false: false, currentUser: currentUser }
+
+    for (index of res.rows) {
+      if (index.place_id === place_id) {
+        return true
+      }
+    }
+    return { false: false, currentUser: currentUser }
+  })
+  .catch(error => {
+    console.log("Error: ", error)
+  })
+}
+
 // export helper functions to be used elsewhere
 module.exports = {
   userNameExists,
@@ -232,5 +253,6 @@ module.exports = {
   getUserId,
   addSavedParkForUser,
   getParkName,
-  deleteSavedParkForUser
+  deleteSavedParkForUser,
+  parkVerification
 }
