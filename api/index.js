@@ -16,12 +16,14 @@ const registerRoute = require('./routes/register')
 const loginRoute = require('./routes/login')
 const reviewsRoute = require('./routes/reviews')
 const indexRoute = require('./routes/index')
+const savedParksRoute = require('./routes/savedParks')
 
 // GET & POST requests here, mount all resource routes
 app.use('/register', registerRoute)
 app.use('/login', loginRoute)
 app.use('/reviews', reviewsRoute)
 app.use('/', indexRoute)
+app.use('/userSavedParks', savedParksRoute)
 
 // app listener
 app.listen(5000, () => {

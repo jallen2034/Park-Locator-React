@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = () => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState({})
+  console.log("parksForMap: ", parksForMap)
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
