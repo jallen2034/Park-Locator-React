@@ -186,7 +186,6 @@ const getUserId = function (uuid) {
 
 // helper function to add a selected park to a users favourites
 const addSavedParkForUser = function (place_id, currentUser) {
-  console.log("currentUser in addSavedParkForUser function: ", currentUser)
   const parameters = [place_id, currentUser[0].id]
   const query = `
     INSERT INTO user_saved_parks (place_id, user_id) 
