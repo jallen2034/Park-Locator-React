@@ -7,6 +7,7 @@ import axios from 'axios'
 const retrieveParksForMap = function (setParksForMap) {
   axios.get("http://localhost:5000/")
   .then((response) => {
+    console.log("response from server with parks: ", response)
     setParksForMap(response.data)
   })
 }
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const HomePage = () => {
+const HomePage = ({ currentUser }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState({})
 
@@ -37,7 +38,7 @@ const HomePage = () => {
   return (
     <div className={classes.root}>
       <div className={classes.parkList}>
-        <ParkList parksForMap={parksForMap} />
+        <ParkList parksForMap={parksForMap} currentUser={currentUser} />
       </div>
       <div>
         <Map />

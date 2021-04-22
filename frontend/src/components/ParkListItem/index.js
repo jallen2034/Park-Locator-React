@@ -2,16 +2,16 @@ import React from 'react'
 import ParkData from '../ParkData'
 import Button from '../Button'
 
-const ParkListItem = ({name, formattedAddress, phone, website}) => {
+const ParkListItem = ({place_id, name, formattedAddress, phone, website, currentUser}) => {
   return (
-    <div>
+    <div id={place_id}>
       <ParkData
         name={name}
         formattedAddress={formattedAddress}
         phone={phone}
         website={website}
       />
-      <Button/>
+      <Button place_id={place_id} currentUser={currentUser}/>
     </div>
   )
 }

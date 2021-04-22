@@ -20,7 +20,6 @@ const generateRandomString = function () {
  * vulnerable to injection - cant get this to work yet without doing this - BAD need to fix! */
 const userNameExists = function (username) {
   const parameters = [username]
-
   const query = `
     SELECT username
     FROM users
@@ -46,7 +45,6 @@ const userNameExists = function (username) {
  * https://node-postgres.com/features/queries#Parameterized%20query */
 const validUsernamePassword = function (username, password) {
   const parameters = [username]
-
   const query = `
     SELECT password, uuid
     FROM users
@@ -133,7 +131,6 @@ const retrieveParksForMap = function () {
 const usersSavedParks = function (uuid) {
   console.log(uuid)
   const parameters = [uuid]
-
   const query = `
     SELECT name, formatted_address, phone, website, location_lat, location_long, all_skateparks.place_id 
     FROM user_saved_parks 
@@ -157,6 +154,44 @@ const usersSavedParks = function (uuid) {
     })
 }
 
+// helper function to get the current users id from their uuid
+const getUserId = function (uuid) {
+  const parameters = [uuid]
+
+  const query = `
+    SELECT id FROM users
+    WHERE uuid = $1
+  `
+
+  return db.query(query, parameters)
+  .then(res => {
+    console.log(res.rows)
+    return res.rows
+  })
+  .catch(error => {
+    console.log("Error: ", error)
+  })
+}
+
+// helper function to add a selected park to a users favourites
+const addSavedParkForUser = function (place_id, currentUser) {
+  const parameters = [place_id, currentUser[0].id]
+  const query = `
+    INSERT INTO user_saved_parks (place_id, user_id) 
+    VALUES ($1, $2);
+  `
+
+  return db.query(query, parameters)
+  .then(res => {
+    console.log("GOT HERE")
+    const successfulQuery = "Succesful insert!"
+    return successfulQuery
+  })
+  .catch(error => {
+    console.log("Error: ", error)
+  })
+}
+
 // export helper functions to be used elsewhere
 module.exports = {
   userNameExists,
@@ -164,5 +199,7 @@ module.exports = {
   validUsernamePassword,
   retrieveReviews,
   retrieveParksForMap,
-  usersSavedParks
+  usersSavedParks,
+  getUserId,
+  addSavedParkForUser
 }

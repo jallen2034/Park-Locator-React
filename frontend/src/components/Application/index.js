@@ -44,7 +44,7 @@ const Application = ({ currentUser, setCurrentUser }) => {
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <HomePage />
+        <HomePage currentUser={currentUser} />
       </div>
     )
   }
