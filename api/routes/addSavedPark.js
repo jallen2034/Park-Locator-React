@@ -15,7 +15,6 @@ addSavedParksRoute.put("/", (req, res) => {
     } 
   })
   .then((value) => {
-    console.log("here your valid user id yee: ", value)
 
     if (value) {
       return getParkName(place_id)
@@ -24,7 +23,6 @@ addSavedParksRoute.put("/", (req, res) => {
     }
   })
   .then((value) => {
-    console.log("Park name!: ", value)
     res.send(value)
   })
   .catch((error) => {

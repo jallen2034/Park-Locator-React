@@ -3,9 +3,7 @@ const deleteSavedParkRoute = express.Router()
 const { deleteSavedParkForUser, getUserId, getParkName } = require('./helpers')
 
 deleteSavedParkRoute.put("/", (req, res) => {
-  console.log("GOT HERE")
   const { place_id, currentUser } = req.body
-  console.log("currentUser: ", currentUser)
   
   let getUsersId = getUserId(currentUser.uuid)
   getUsersId.then((value) => {

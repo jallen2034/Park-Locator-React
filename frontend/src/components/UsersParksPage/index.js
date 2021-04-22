@@ -13,7 +13,6 @@ const retrieveUsersSavedParks = function (currentUser, setUsersSavedParks) {
 
 const UsersParksPage = ({ currentUser, setCurrentUser }) => {
   const [usersSavedParks, setUsersSavedParks] = useState({})
-  console.log("usersSavedParks on frontend: ", usersSavedParks)
 
   useEffect(() => {
     retrieveUsersSavedParks(currentUser, setUsersSavedParks)
