@@ -1,26 +1,24 @@
 const express = require("express")
-const addSavedParksRoute = express.Router()
-const { addSavedParkForUser, getUserId, getParkName } = require('./helpers')
+const deleteSavedParkRoute = express.Router()
+const { deleteSavedParkForUser, getUserId, getParkName } = require('./helpers')
 
-// POST route/backend logic to handle the users saved parks
-addSavedParksRoute.put("/", (req, res) => {
+deleteSavedParkRoute.put("/", (req, res) => {
   const { place_id, currentUser } = req.body
   
   let getUsersId = getUserId(currentUser.uuid)
   getUsersId.then((value) => {
     if (value) {
-      return addSavedParkForUser(place_id, value)
+      return deleteSavedParkForUser(place_id, value)
     } else {
-      throw new Error('error grabbing parks')
+      throw new Error('error deleting park')
     } 
   })
   .then((value) => {
-
     if (value) {
       return getParkName(place_id)
     } else {
       throw new Error('error grabbing parks')
-    }
+    } 
   })
   .then((value) => {
     res.send(value)
@@ -30,5 +28,4 @@ addSavedParksRoute.put("/", (req, res) => {
   })
 })
 
-// export module
-module.exports = addSavedParksRoute;
+module.exports = deleteSavedParkRoute;

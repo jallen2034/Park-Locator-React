@@ -17,7 +17,8 @@ const loginRoute = require('./routes/login')
 const reviewsRoute = require('./routes/reviews')
 const indexRoute = require('./routes/index')
 const savedParksRoute = require('./routes/savedParks')
-const addSavedPark = require('./routes/addSavedPark')
+const addSavedParkRoute = require('./routes/addSavedPark')
+const deleteSavedParkRoute = require('./routes/deleteSavedPark')
 
 // GET & POST requests here, mount all resource routes
 app.use('/register', registerRoute)
@@ -25,7 +26,8 @@ app.use('/login', loginRoute)
 app.use('/reviews', reviewsRoute)
 app.use('/', indexRoute)
 app.use('/userSavedParks', savedParksRoute)
-app.use('/addSavedPark', addSavedPark)
+app.use('/addSavedPark', addSavedParkRoute)
+app.use('/deleteSavedPark', deleteSavedParkRoute)
 
 // app listener
 app.listen(5000, () => {

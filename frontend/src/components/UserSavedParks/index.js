@@ -2,11 +2,11 @@ import React from 'react'
 import ParkData from '../ParkData'
 import UserSavedParksButton from '../Button/index.2'
 
-const UserSavedParks = ({ usersSavedParks }) => {
+const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks }) => {
   let savedParks
 
   if (usersSavedParks.length > 0) {
-    savedParks = usersSavedParks.map(({name, formattedAddress, phone, website}) => {
+    savedParks = usersSavedParks.map(({ place_id, name, formattedAddress, phone, website }) => {
       return (
         <div>
           <ParkData
@@ -15,7 +15,11 @@ const UserSavedParks = ({ usersSavedParks }) => {
             phone={phone}
             website={website}
           />
-          <UserSavedParksButton />
+          <UserSavedParksButton 
+            currentUser={currentUser} 
+            place_id={place_id} 
+            setUsersSavedParks={setUsersSavedParks}
+          />
         </div>
       )
     })
