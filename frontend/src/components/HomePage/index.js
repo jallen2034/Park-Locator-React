@@ -16,13 +16,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     height: '100%',
+  },
+  parkList: {
+    overflowY: 'scroll',
+    width:'550px',
+    float: 'left',
+    height:'100vh',
+    position:'relative'
   }
 }))
 
 const HomePage = () => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState({})
-  console.log("parksForMap: ", parksForMap)
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
@@ -30,7 +36,7 @@ const HomePage = () => {
 
   return (
     <div className={classes.root}>
-      <div>
+      <div className={classes.parkList}>
         <ParkList parksForMap={parksForMap} />
       </div>
       <div>

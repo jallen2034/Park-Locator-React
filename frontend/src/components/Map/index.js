@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 // 49.2827° N, 123.1207° W
 const MapDisplay = () => {
   return (
-    <MapContainer center={[49.282, -123.120]} zoom={13} scrollWheelZoom={false} style={{ height: '100vh', width: '85vw', marginLeft: '20px' }}>
+    <MapContainer center={[49.282, -123.120]} zoom={13} scrollWheelZoom={false} style={{ height: '100vh', width: '70vw', marginLeft: '0px' }}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
