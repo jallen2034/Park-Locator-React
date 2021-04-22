@@ -47,7 +47,8 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
         <Button 
           color="inherit"
           onClick={() =>
-            buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)}
+            buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+          }
         >{buttonStatus}
         </Button>
       </Toolbar>
