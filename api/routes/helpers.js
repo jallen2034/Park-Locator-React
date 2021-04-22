@@ -16,8 +16,7 @@ const generateRandomString = function () {
   return text;
 };
 
-/* helper to check if a users email address already exists in our database
- * vulnerable to injection - cant get this to work yet without doing this - BAD need to fix! */
+// helper to check if a users email address already exists in our database 
 const userNameExists = function (username) {
   const parameters = [username]
   const query = `
@@ -129,7 +128,6 @@ const retrieveParksForMap = function () {
 /* helper function to retrieve the saved parks for the current user signed in
  * https://towardsdatascience.com/how-to-solve-the-ambiguous-name-column-error-in-sql-d4c256f3d14c?gi=505204b5446d */
 const usersSavedParks = function (uuid) {
-  console.log(uuid)
   const parameters = [uuid]
   const query = `
     SELECT name, formatted_address, phone, website, location_lat, location_long, all_skateparks.place_id 
@@ -154,10 +152,25 @@ const usersSavedParks = function (uuid) {
     })
 }
 
+// helper function to get the skatepark name on what a user selects
+const getParkName = function (place_id) {
+  const parameters = [place_id]
+  const query = `
+    SELECT name FROM all_skateparks 
+    WHERE place_id = $1
+  `
+
+  return db.query(query, parameters)
+  .then(res => {
+    return res.rows[0].name
+  }).catch(error => {
+    console.log("error", error)
+  })
+}
+
 // helper function to get the current users id from their uuid
 const getUserId = function (uuid) {
   const parameters = [uuid]
-
   const query = `
     SELECT id FROM users
     WHERE uuid = $1
@@ -184,8 +197,24 @@ const addSavedParkForUser = function (place_id, currentUser) {
   return db.query(query, parameters)
   .then(res => {
     console.log("GOT HERE")
-    const successfulQuery = "Succesful insert!"
-    return successfulQuery
+    return "Succesful insert!"
+  })
+  .catch(error => {
+    console.log("Error: ", error)
+  })
+}
+
+// helper function to delete a saved park from user list
+const deleteSavedParkForUser = function (place_id, currentUser) {
+  const parameters = [place_id, currentUser[0].id]
+  const query = `
+    DELETE from user_saved_parks
+    WHERE place_id = $1 AND user_id = $2
+  `
+
+  return db.query(query, parameters)
+  .then(res => {
+    return "Successful delete query ran"
   })
   .catch(error => {
     console.log("Error: ", error)
@@ -201,5 +230,7 @@ module.exports = {
   retrieveParksForMap,
   usersSavedParks,
   getUserId,
-  addSavedParkForUser
+  addSavedParkForUser,
+  getParkName,
+  deleteSavedParkForUser
 }

@@ -25,7 +25,11 @@ const UsersParksPage = ({ currentUser, setCurrentUser }) => {
         buttonStatus='Logout'
         setCurrentUser={setCurrentUser}
       />
-      <UserSavedParks usersSavedParks={usersSavedParks}/>
+      <UserSavedParks 
+        usersSavedParks={usersSavedParks} 
+        currentUser={currentUser}
+        setUsersSavedParks={setUsersSavedParks}
+      />
     </div>
   )
 }
