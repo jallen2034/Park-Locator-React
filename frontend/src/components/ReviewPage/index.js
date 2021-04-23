@@ -1,4 +1,6 @@
 import Navbar from '../Navbar'
+import SignUp from '../SignUp'
+import Login from '../Login'
 import axios from 'axios';
 import ReviewParkList from '../ReviewParkList'
 import { useState, useEffect } from 'react'
@@ -13,19 +15,62 @@ const retrieveParks = function (setReviews) {
 }
 
 // reviews page component with real API data now
-const ReviewPage = () => {
+const ReviewPage = ({ currentUser, setCurrentUser, key, setKey, register, setRegister }) => {
   const [reviews, setReviews] = useState({})
 
   useEffect(() => {
     retrieveParks(setReviews)
   }, []);
 
-  return (
-    <>
-      <Navbar buttonStatus="logout" />
-      <ReviewParkList reviews={reviews} />
-    </>
-  )
+  if (!key && !register && !currentUser) {
+    return (
+      <div>
+        <Navbar
+          buttonStatus='Register'
+          setRegister={setRegister}
+          setKey={setKey}
+          setCurrentUser={setCurrentUser}
+        />
+        <Login 
+          setRegister={setRegister} 
+          setKey={setKey} 
+          setCurrentUser={setCurrentUser}
+        />
+      </div>
+    )
+  } else if (!key && register && !currentUser) {
+    return (
+      <div>
+        <Navbar 
+          buttonStatus='Login'
+          setRegister={setRegister}
+          setKey={setKey}
+          setCurrentUser={setCurrentUser}
+        />
+        <SignUp 
+          setRegister={setRegister} 
+          setKey={setKey} 
+          setCurrentUser={setCurrentUser}
+        />
+      </div>
+    )
+  } else {
+    return (
+      <>
+        <Navbar 
+          buttonStatus="Logout"
+          setCurrentUser={setCurrentUser}
+          key={key}
+          setKey={setKey}
+          register={register}
+          setRegister={setRegister}
+        />
+        <ReviewParkList 
+          reviews={reviews} 
+        />
+      </>
+    )
+  }
 }
 
 export default ReviewPage

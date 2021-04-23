@@ -8,25 +8,47 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 
 function App() {
+
   const sessionUuid = window.localStorage.getItem('Uuid')
+  const [key, setKey] = useState(false)
+  const [register, setRegister] = useState(false)
   const [currentUser, setCurrentUser] = useState({
     uuid: sessionUuid || null
   })
-
-  console.log("currentUser in App.js: ", currentUser);
 
   return (
     <>
       <Router>
         <Switch>
           <Route path="/userSavedParks">
-            <UsersParksPage currentUser={currentUser} setCurrentUser={setCurrentUser}  />
+            <UsersParksPage 
+              currentUser={currentUser} 
+              setCurrentUser={setCurrentUser}
+              key={key}
+              setKey={setKey}
+              register={register}
+              setRegister={setRegister}
+            />
           </Route>
           <Route path="/reviews">
-            <ReviewPage currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <ReviewPage 
+              currentUser={currentUser} 
+              setCurrentUser={setCurrentUser}
+              key={key}
+              setKey={setKey}
+              register={register}
+              setRegister={setRegister}
+            />
           </Route>
           <Route path="/">
-            <Application currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <Application 
+              currentUser={currentUser} 
+              setCurrentUser={setCurrentUser}
+              key={key}
+              setKey={setKey}
+              register={register}
+              setRegister={setRegister}
+            />
           </Route>
         </Switch>
       </Router>
