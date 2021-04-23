@@ -8,8 +8,9 @@ addSavedParksRoute.put("/", (req, res) => {
   
   let getUsersId = getUserId(currentUser.uuid)
   getUsersId.then((value) => {
+    console.log("value: ", value)
 
-    if (value) {
+    if (value.length > 0) {
       return parkVerification(place_id, value)
     } else {
       throw new Error('error grabbing parks')

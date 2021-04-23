@@ -38,31 +38,51 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser)
 // component for our navbar
 function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
   const classes = useStyles()
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" className={classes.title}>
-          Park Locator
-        </Typography>
-        <Button color="inherit">
-          <Link to="/">Homepage</Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/userSavedParks">User Saved Parks</Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/reviews">Reviews</Link>
-        </Button>
-        <Button 
-          color="inherit"
-          onClick={() =>
-            buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
-          }
-        >{buttonStatus}
-        </Button>
-      </Toolbar>
-    </AppBar>
-  )
+
+  if (buttonStatus === 'Logout') {
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Park Locator
+          </Typography>
+          <Button color="inherit">
+            <Link to="/">Homepage</Link>
+          </Button>
+          <Button color="inherit">
+            <Link to="/userSavedParks">User Saved Parks</Link>
+          </Button>
+          <Button color="inherit">
+            <Link to="/reviews">Reviews</Link>
+          </Button>
+          <Button 
+            color="inherit"
+            onClick={() =>
+              buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+            }
+          >{buttonStatus}
+          </Button>
+        </Toolbar>
+      </AppBar>
+    )
+  } else {
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Park Locator
+          </Typography>
+          <Button 
+            color="inherit"
+            onClick={() =>
+              buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+            }
+          >{buttonStatus}
+          </Button>
+        </Toolbar>
+      </AppBar>
+    )
+  } 
 }
 
 export default Navbar
