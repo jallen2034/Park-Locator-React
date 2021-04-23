@@ -5,6 +5,7 @@ import SignUp from '../SignUp'
 import Login from '../Login'
 
 const Application = ({ currentUser, setCurrentUser }) => {
+  console.log("Curent user login yee: ", currentUser)
  
   // session storage token & register state to test conditional rendering in storybook
   const [key, setKey] = useState(false)
@@ -20,7 +21,11 @@ const Application = ({ currentUser, setCurrentUser }) => {
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <Login setRegister={setRegister} setKey={setKey} />
+        <Login 
+          setRegister={setRegister} 
+          setKey={setKey} 
+          setCurrentUser={setCurrentUser}
+        />
       </div>
     )
   } else if (!key && register && !currentUser) {
@@ -32,7 +37,11 @@ const Application = ({ currentUser, setCurrentUser }) => {
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <SignUp setRegister={setRegister} setKey={setKey} />
+        <SignUp 
+          setRegister={setRegister} 
+          setKey={setKey} 
+          setCurrentUser={setCurrentUser}
+        />
       </div>
     )
   } else {
