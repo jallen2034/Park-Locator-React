@@ -52,13 +52,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignIn ({setRegister, setKey}) {
+function SignIn ({setRegister, setKey, setCurrentUser}) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const classes = useStyles();
 
   // helper callback routes to the loginRoute express endpoint log the user in
-  const loginUser = function (event) {
+  const loginUser = function (event, setCurrentUser) {
     event.preventDefault()
 
     axios.put("http://localhost:5000/login", { username, password } )
@@ -67,6 +67,7 @@ function SignIn ({setRegister, setKey}) {
         if (response.data.true === true) {
           setKey(true)
           window.localStorage.setItem('Uuid', response.data.uuid)
+          setCurrentUser({uuid: response.data.uuid})
         } else {
           toast.error(response.data)
         }
@@ -121,7 +122,7 @@ function SignIn ({setRegister, setKey}) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={loginUser}
+              onClick={(event) => loginUser(event, setCurrentUser)}
             >
               Sign In
             </Button>

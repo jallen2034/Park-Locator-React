@@ -50,14 +50,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignUp({setRegister, setKey}) {
+function SignUp({setRegister, setKey, setCurrentUser}) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const classes = useStyles();
   
   // helper callback routes to the registerRoute express endpoint to register + log the user in automatically
-  const registerUser = function (event) {
+  const registerUser = function (event, setCurrentUser) {
     event.preventDefault()
 
     axios.put("http://localhost:5000/register", { username, password, passwordConfirm })
@@ -66,6 +66,7 @@ function SignUp({setRegister, setKey}) {
       if (response.data.true === true) {
         setKey(true)
         window.localStorage.setItem('Uuid', response.data.uuid)
+        setCurrentUser({uuid: response.data.uuid})
       } else {
         toast.error(response.data)
       }
@@ -130,7 +131,7 @@ function SignUp({setRegister, setKey}) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={registerUser}
+              onClick={(event) => registerUser(event, setCurrentUser)}
             >
               Sign Up
             </Button>
