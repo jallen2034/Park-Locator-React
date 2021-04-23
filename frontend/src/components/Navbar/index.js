@@ -44,6 +44,15 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
         <Typography variant="h6" className={classes.title}>
           Park Locator
         </Typography>
+        <Button color="inherit">
+          <Link to="/">Homepage</Link>
+        </Button>
+        <Button color="inherit">
+          <Link to="/userSavedParks">User Saved Parks</Link>
+        </Button>
+        <Button color="inherit">
+          <Link to="/reviews">Reviews</Link>
+        </Button>
         <Button 
           color="inherit"
           onClick={() =>
