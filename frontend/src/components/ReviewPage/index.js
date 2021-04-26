@@ -22,7 +22,7 @@ const ReviewPage = ({ currentUser, setCurrentUser, key, setKey, register, setReg
     retrieveParks(setReviews)
   }, []);
 
-  if (!key && !register && !currentUser) {
+  if (!key && !register && currentUser.uuid === null) {
     return (
       <div>
         <Navbar
@@ -38,7 +38,7 @@ const ReviewPage = ({ currentUser, setCurrentUser, key, setKey, register, setReg
         />
       </div>
     )
-  } else if (!key && register && !currentUser) {
+  } else if (!key && register && currentUser.uuid === null) {
     return (
       <div>
         <Navbar 

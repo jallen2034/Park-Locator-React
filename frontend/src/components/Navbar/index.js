@@ -26,7 +26,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser)
   if (buttonStatus === 'Logout') {
     setRegister(false)
     setKey(false)
-    setCurrentUser(null)
+    setCurrentUser({uuid: null})
     window.localStorage.removeItem('Uuid')
   } else if (buttonStatus === 'Login') {
     setRegister(false)

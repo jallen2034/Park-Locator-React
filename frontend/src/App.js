@@ -6,7 +6,7 @@ import UsersParksPage from '../src/components/UsersParksPage'
 import ReviewPage from '../src/components/ReviewPage'
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
-
+// app component
 function App() {
 
   const sessionUuid = window.localStorage.getItem('Uuid')
@@ -40,7 +40,7 @@ function App() {
               setRegister={setRegister}
             />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Application 
               currentUser={currentUser} 
               setCurrentUser={setCurrentUser}
