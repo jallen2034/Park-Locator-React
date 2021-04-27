@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = ({ currentUser }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState([])
+  const [clickedPark, setClickedPark] = useState('')
+  console.log("clickedPark in HomePage component: ", clickedPark)
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
@@ -37,11 +39,18 @@ const HomePage = ({ currentUser }) => {
   return (
     <div className={classes.root}>
       <div className={classes.parkList}>
-        <ParkList parksForMap={parksForMap} currentUser={currentUser} />
+        <ParkList 
+          parksForMap={parksForMap} 
+          currentUser={currentUser} 
+          setClickedPark={setClickedPark}
+          clickedPark={clickedPark}
+        />
       </div>
       <div>
         <Map 
-          parksForMap={parksForMap} 
+          parksForMap={parksForMap}
+          setClickedPark={setClickedPark}
+          clickedPark={clickedPark}
         />
       </div>
     </div>
