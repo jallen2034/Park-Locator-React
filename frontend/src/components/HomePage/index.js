@@ -7,7 +7,6 @@ import axios from 'axios'
 const retrieveParksForMap = function (setParksForMap) {
   axios.get("http://localhost:5000/")
   .then((response) => {
-    console.log("response from server with parks: ", response)
     setParksForMap(response.data)
   })
 }
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = ({ currentUser }) => {
   const classes = useStyles()
-  const [parksForMap, setParksForMap] = useState({})
+  const [parksForMap, setParksForMap] = useState([])
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
@@ -41,7 +40,9 @@ const HomePage = ({ currentUser }) => {
         <ParkList parksForMap={parksForMap} currentUser={currentUser} />
       </div>
       <div>
-        <Map />
+        <Map 
+          parksForMap={parksForMap} 
+        />
       </div>
     </div>
   )
