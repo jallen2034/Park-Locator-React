@@ -5,7 +5,6 @@ import React from 'react'
 // https://github.com/PaulLeCam/react-leaflet/issues/453
 // 49.2827° N, 123.1207° W
 const MapDisplay = ({ parksForMap }) => {
-  console.log("parksForMap in MapDisplay component: ", parksForMap)
   let listOfMarkers
 
   if (parksForMap.length > 0) {
@@ -16,8 +15,6 @@ const MapDisplay = ({ parksForMap }) => {
       )
     })
   }
-
-  console.log("listOfMarkers filled: ", listOfMarkers)
 
   return (
     <MapContainer center={[49.282, -123.120]} zoom={13} scrollWheelZoom={false} style={{ height: '100vh', width: '70vw', marginLeft: '0px' }}>

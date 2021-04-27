@@ -29,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = ({ currentUser }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState([])
-  console.log("parksForMap from server with parks: ", parksForMap)
-  console.log("typeof parksForMap from server with parks: ", typeof parksForMap)
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
