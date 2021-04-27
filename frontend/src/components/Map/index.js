@@ -11,7 +11,7 @@ const MapDisplay = ({ parksForMap }) => {
   if (parksForMap.length > 0) {
     listOfMarkers = parksForMap.map(({ place_id, location_lat, location_long }) => {
       return (
-        <Marker id={place_id} position={[location_lat, location_long]}>
+        <Marker place_id={place_id} position={[location_lat, location_long]}>
         </Marker>
       )
     })
