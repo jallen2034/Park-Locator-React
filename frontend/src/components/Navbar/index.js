@@ -60,7 +60,8 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
             onClick={() =>
               buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
             }
-          >{buttonStatus}
+          >
+            <Link to="/">{buttonStatus}</Link>
           </Button>
         </Toolbar>
       </AppBar>
