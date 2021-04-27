@@ -6,7 +6,11 @@ import Login from '../Login'
 
 const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRegister }) => {
  
-  if (!key && !register && !currentUser) {
+  console.log("currentUser.uuid in application route: ", currentUser.uuid)
+  console.log("register in application component: ", register)
+
+  if (!register && !currentUser.uuid) {
+    console.log("FIRST")
     return (
       <div>
         <Navbar
@@ -22,7 +26,8 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
         />
       </div>
     )
-  } else if (!key && register && !currentUser) {
+  } else if (register && !currentUser.uuid) {
+    console.log("SECOND")
     return (
       <div>
         <Navbar 
@@ -39,6 +44,7 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
       </div>
     )
   } else {
+    console.log("THIRD")
     return (
       <div>
         <Navbar 

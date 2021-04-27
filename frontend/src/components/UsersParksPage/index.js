@@ -5,6 +5,8 @@ import SignUp from '../SignUp'
 import UserSavedParks from '../UserSavedParks'
 import axios from 'axios';
 
+
+
 // helper function to retrieveUsersSavedParks if the currentuser is set to null though dont run this
 const retrieveUsersSavedParks = function (currentUser, setUsersSavedParks) {
   if (currentUser === null) return 
@@ -22,7 +24,7 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
     retrieveUsersSavedParks(currentUser, setUsersSavedParks)
   }, [, currentUser]);
 
-  if (!key && !register && !currentUser) {
+  if (!key && !register && currentUser.uuid === null) {
     return (
       <div>
         <Navbar
@@ -38,7 +40,7 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
         />
       </div>
     )
-  } else if (!key && register && !currentUser) {
+  } else if (!key && register && currentUser.uuid === null) {
     return (
       <div>
         <Navbar 
