@@ -1,4 +1,3 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import ParkListItem from '../ParkListItem'
 
@@ -16,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-// loop through array of data and create a parklistitem with prop info for each park
+/* loop through array of data and create a parklistitem with prop info for each park
+ * https://reactjs.org/docs/hooks-reference.html#useref */
 const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark }) => {
   const classes = useStyles()
   let listOfParks
@@ -27,7 +27,7 @@ const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark }) => 
       if (clickedPark === place_id) selected = true
       
       return (
-        <div 
+        <div
           place_id={place_id} 
           onClick={(event) => listItemClick(event, place_id, setClickedPark)}
           className={(selected === true) ? classes.selected : classes.notSelected}
@@ -39,6 +39,7 @@ const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark }) => 
             phone={phone}
             website={website}
             currentUser={currentUser}
+            selected={selected}
           />
         </div>
       )
