@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../Navbar'
 import UserSavedParks from '../UserSavedParks'
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    paddingTop: '75px'
+  }
+}))
 
 // helper function to retrieveUsersSavedParks if the currentuser is set to null though dont run this
 const retrieveUsersSavedParks = function (currentUser, setUsersSavedParks) {
@@ -14,6 +21,7 @@ const retrieveUsersSavedParks = function (currentUser, setUsersSavedParks) {
 }
 
 const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, setRegister }) => {
+  const classes = useStyles()
   const [usersSavedParks, setUsersSavedParks] = useState({})
 
   useEffect(() => {
@@ -21,7 +29,7 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
   }, [ , currentUser]);
 
   return (
-    <div>
+    <>
       <Navbar
         buttonStatus='Logout'
         setCurrentUser={setCurrentUser}
@@ -30,12 +38,14 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
         register={register}
         setRegister={setRegister}
       />
-      <UserSavedParks
-        usersSavedParks={usersSavedParks}
-        currentUser={currentUser}
-        setUsersSavedParks={setUsersSavedParks}
-      />
-    </div>
+        <div className={classes.root}>
+          <UserSavedParks
+            usersSavedParks={usersSavedParks}
+            currentUser={currentUser}
+            setUsersSavedParks={setUsersSavedParks}
+          />
+        </div>
+    </>
   )
 }
 
