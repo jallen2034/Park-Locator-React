@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
-    zIndex: 1201,
-    height: '64px'
+    // zIndex: 1201,
+    height: '64px',
   },
   toolbar: {
     height: '64px'
@@ -41,7 +41,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
 
   if (buttonStatus === 'Logout') {
     return (
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Park Locator
@@ -68,7 +68,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
     )
   } else {
     return (
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Park Locator

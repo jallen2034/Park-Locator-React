@@ -3,12 +3,18 @@ import Navbar from '../Navbar'
 import HomePage from '../HomePage'
 import SignUp from '../SignUp'
 import Login from '../Login'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    overflow: 'hidden',
+    position: 'fixed'
+  }
+}))
 
 const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRegister }) => {
+  const classes = useStyles()
  
-  console.log("currentUser.uuid in application route: ", currentUser.uuid)
-  console.log("register in application component: ", register)
-
   if (!register && !currentUser.uuid) {
     console.log("FIRST")
     return (
@@ -30,7 +36,7 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
     console.log("SECOND")
     return (
       <div>
-        <Navbar 
+        <Navbar
           buttonStatus='Login'
           setRegister={setRegister}
           setKey={setKey}
@@ -46,14 +52,17 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
   } else {
     console.log("THIRD")
     return (
-      <div>
+      <div className={classes.root}>
         <Navbar 
+          // style={{marginBottom: "64px"}}
           buttonStatus='Logout'
           setRegister={setRegister}
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <HomePage currentUser={currentUser} />
+        <div style={{marginTop: "64px"}}>
+          <HomePage currentUser={currentUser}/>
+        </div>
       </div>
     )
   }

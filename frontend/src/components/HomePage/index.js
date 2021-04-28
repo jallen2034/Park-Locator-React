@@ -15,14 +15,18 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100%',
+    height: '100vh',
+    overflow: 'hidden'
   },
   parkList: {
     overflowY: 'scroll',
     width:'550px',
     float: 'left',
     height:'100vh',
-    position:'relative'
+    position:'relative',
+  },
+  map: {
+    marginTop: '250px',
   }
 }))
 
@@ -30,7 +34,6 @@ const HomePage = ({ currentUser }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState([])
   const [clickedPark, setClickedPark] = useState('')
-  console.log("clickedPark in HomePage component: ", clickedPark)
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
@@ -46,8 +49,8 @@ const HomePage = ({ currentUser }) => {
           clickedPark={clickedPark}
         />
       </div>
-      <div>
-        <Map 
+      <div classname={classes.map}>
+        <Map
           parksForMap={parksForMap}
           setClickedPark={setClickedPark}
           clickedPark={clickedPark}
