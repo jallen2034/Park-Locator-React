@@ -7,7 +7,9 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
 
   useEffect(() => {
     if (parkDiv.current && selected) {
-      parkDiv.current.scrollIntoView({ behavior: 'smooth'})
+      parkDiv.current.scrollIntoView({ 
+        behavior: 'smooth', 
+      })
     }
   }, [selected, parkDiv])
 
