@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
-    // zIndex: 1201,
     height: '64px',
   },
   toolbar: {
@@ -68,7 +67,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
     )
   } else {
     return (
-      <AppBar position="static" className={classes.root}>
+      <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Park Locator
