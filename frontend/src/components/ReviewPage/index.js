@@ -2,6 +2,14 @@ import Navbar from '../Navbar'
 import axios from 'axios';
 import ReviewParkList from '../ReviewParkList'
 import { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    overflow: 'scroll',
+    position: 'relative'
+  }
+}))
 
 /* helper function to hit endpoint and retrieve all skateparks when this component renders
  * https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/ */
@@ -14,6 +22,7 @@ const retrieveParks = function (setReviews) {
 
 // reviews page component with real API data now
 const ReviewPage = ({ currentUser, setCurrentUser, key, setKey, register, setRegister }) => {
+  const classes = useStyles()
   const [reviews, setReviews] = useState({})
 
   useEffect(() => {
@@ -21,7 +30,7 @@ const ReviewPage = ({ currentUser, setCurrentUser, key, setKey, register, setReg
   }, []);
 
   return (
-    <>
+    <div className={classes.root}>
       <Navbar
         buttonStatus="Logout"
         setCurrentUser={setCurrentUser}
@@ -33,7 +42,7 @@ const ReviewPage = ({ currentUser, setCurrentUser, key, setKey, register, setReg
       <ReviewParkList
         reviews={reviews}
       />
-    </>
+    </div>
   )
 }
 
