@@ -8,11 +8,13 @@ const listItemClick = function (event, place_id, setClickedPark) {
 
 const useStyles = makeStyles((theme) => ({
   selected: {
-    backgroundColor: '#e6e6e6'
+    backgroundColor: '#e6e6e6',
+    padding: '20px'
   },
   notSelected: {
-    backgroundColor: 'white'
-  }
+    backgroundColor: 'white',
+    padding: '20px'
+  },
 }))
 
 /* loop through array of data and create a parklistitem with prop info for each park

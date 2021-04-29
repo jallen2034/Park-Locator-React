@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1
+  },
+  button: {
+    textDecoration: 'none',
+    color: 'white'
   }
 }))
 
@@ -46,13 +50,13 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
             Park Locator
           </Typography>
           <Button color="inherit">
-            <Link to="/">Homepage</Link>
+            <Link to="/" className={classes.button}>Homepage</Link>
           </Button>
           <Button color="inherit">
-            <Link to="/userSavedParks">User Saved Parks</Link>
+            <Link to="/userSavedParks" className={classes.button}>User Saved Parks</Link>
           </Button>
           <Button color="inherit">
-            <Link to="/reviews">Reviews</Link>
+            <Link to="/reviews" className={classes.button}>Reviews</Link>
           </Button>
           <Button 
             color="inherit"
@@ -60,7 +64,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
               buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
             }
           >
-            <Link to="/">{buttonStatus}</Link>
+            <Link to="/" className={classes.button}>{buttonStatus}</Link>
           </Button>
         </Toolbar>
       </AppBar>
@@ -72,7 +76,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
           <Typography variant="h6" className={classes.title}>
             Park Locator
           </Typography>
-          <Button 
+          <Button
             color="inherit"
             onClick={() =>
               buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
