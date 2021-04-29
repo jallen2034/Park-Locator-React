@@ -1,10 +1,12 @@
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import ParkListItem from '../ParkListItem'
 
 // update state of the clicked park in our list of parks, also updates our map center state too
-const listItemClick = function (event, place_id, setClickedPark, setMapCenter, location_lat, location_long) {
+const listItemClick = function (event, place_id, setClickedPark, setMapCenter, location_lat, location_long, setClickedParkInList, ) {
+  setClickedParkInList(place_id)
+  setClickedPark('')
   setMapCenter([location_lat, location_long])
-  setClickedPark(place_id)
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -20,20 +22,22 @@ const useStyles = makeStyles((theme) => ({
 
 /* loop through array of data and create a parklistitem with prop info for each park
  * https://reactjs.org/docs/hooks-reference.html#useref */
-const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark, setMapCenter }) => {
+const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark, setMapCenter, clickedParkInList, setClickedParkInList }) => {
   const classes = useStyles()
   let listOfParks
   
   if (parksForMap.length > 0) {
     listOfParks = parksForMap.map(({ place_id, name, formatted_address, phone, website, location_lat, location_long }) => {
       let selected = false
+      let selectedStyle = false
       if (clickedPark === place_id) selected = true
-      
+      if (clickedParkInList === place_id) selectedStyle = true
+
       return (
         <div
           place_id={place_id} 
-          onClick={(event) => listItemClick(event, place_id, setClickedPark, setMapCenter, location_lat, location_long)}
-          className={(selected === true) ? classes.selected : classes.notSelected}
+          onClick={(event) => listItemClick(event, place_id, setClickedPark, setMapCenter, location_lat, location_long, setClickedParkInList)}
+          className={(selected === true || selectedStyle === true) ? classes.selected : classes.notSelected}
           >
           <ParkListItem
             place_id={place_id}
