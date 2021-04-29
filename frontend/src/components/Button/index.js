@@ -2,6 +2,13 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: '10px'
+  }
+}))
 
 const addToSavedParks = function(place_id, currentUser) {
   const error = "Sorry, you already added this saved park!"
@@ -17,9 +24,11 @@ const addToSavedParks = function(place_id, currentUser) {
 }
 
 const MyParksButton = ({ place_id, currentUser }) => {
+  const classes = useStyles()
   return (
     <div>
-       <Button 
+       <Button
+        className={classes.root}
         variant="contained" 
         color="primary" 
         disableElevation
