@@ -3,7 +3,7 @@ import React from 'react'
 
 /* helper to set the users selected park/marker 
  * also changes our state for our map center to center to the new marker that was clicked on */
-const MarkerClick = function (event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long) {
+const markerClick = function (event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long) {
   setClickedPark(place_id)
   setMapCenter([location_lat, location_long])
 }
@@ -31,7 +31,7 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
           position={[location_lat, location_long]}
           eventHandlers={{
             click: (event) => {
-              MarkerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long)
+              markerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long)
             },
           }}
         >
