@@ -34,6 +34,7 @@ const HomePage = ({ currentUser }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState([])
   const [clickedPark, setClickedPark] = useState('')
+  const [mapCenter, setMapCenter] = useState([49.282, -123.120])
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
@@ -47,6 +48,7 @@ const HomePage = ({ currentUser }) => {
           currentUser={currentUser} 
           setClickedPark={setClickedPark}
           clickedPark={clickedPark}
+          setMapCenter={setMapCenter}
         />
       </div>
       <div classname={classes.map}>
@@ -54,6 +56,8 @@ const HomePage = ({ currentUser }) => {
           parksForMap={parksForMap}
           setClickedPark={setClickedPark}
           clickedPark={clickedPark}
+          mapCenter={mapCenter}
+          setMapCenter={setMapCenter}
         />
       </div>
     </div>
