@@ -31,10 +31,15 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark }) => {
   }
 
   return (
-    <MapContainer center={[49.282, -123.120]} zoom={13} scrollWheelZoom={false} style={{ height: '100vh', width: '70vw', marginLeft: '0px', overflow: 'hidden'}}>
+    <MapContainer 
+      center={[49.282, -123.120]} 
+      zoom={13} 
+      scrollWheelZoom={false} 
+      style={{ height: '100vh', width: '70vw', marginLeft: '0px', overflow: 'hidden'}}
+    >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=lVUjykFYNWAQcw6IhXoj"
       />
       {listOfMarkers}
     </MapContainer>

@@ -16,7 +16,6 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
   const classes = useStyles()
  
   if (!register && !currentUser.uuid) {
-    console.log("FIRST")
     return (
       <div>
         <Navbar
@@ -33,7 +32,6 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
       </div>
     )
   } else if (register && !currentUser.uuid) {
-    console.log("SECOND")
     return (
       <div>
         <Navbar
@@ -50,11 +48,9 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
       </div>
     )
   } else {
-    console.log("THIRD")
     return (
       <div className={classes.root}>
         <Navbar 
-          // style={{marginBottom: "64px"}}
           buttonStatus='Logout'
           setRegister={setRegister}
           setKey={setKey}
