@@ -3,8 +3,9 @@ import React from 'react'
 
 /* helper to set the users selected park/marker 
  * also changes our state for our map center to center to the new marker that was clicked on */
-const markerClick = function (event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long) {
+const markerClick = function (event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long, setClickedParkInList) {
   setClickedPark(place_id)
+  setClickedParkInList('')
   setMapCenter([location_lat, location_long])
 }
 
@@ -19,7 +20,7 @@ function ChangeView({ center, zoom }) {
  * https://github.com/PaulLeCam/react-leaflet/issues/453
  * https://stackoverflow.com/questions/40901539/arbitrary-function-on-react-leaflet-marker-click
  * https://react-leaflet.js.org/docs/api-map */
-const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMapCenter }) => {
+const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMapCenter, setClickedParkInList }) => {
   let listOfMarkers
 
   if (parksForMap.length > 0) {
@@ -31,7 +32,7 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
           position={[location_lat, location_long]}
           eventHandlers={{
             click: (event) => {
-              markerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long)
+              markerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long, setClickedParkInList)
             },
           }}
         >
@@ -44,7 +45,7 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
     <MapContainer 
       center={mapCenter} 
       zoom={13} 
-      scrollWheelZoom={false} 
+      scrollWheelZoom={true} 
       style={{ height: '100vh', width: '70vw', marginLeft: '0px', overflow: 'hidden'}}
     >
       <ChangeView center={mapCenter} zoom={13} /> 
