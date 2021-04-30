@@ -12,11 +12,11 @@ const listItemClick = function (event, place_id, setClickedPark, setMapCenter, l
 const useStyles = makeStyles((theme) => ({
   selected: {
     backgroundColor: '#e6e6e6',
-    padding: '20px'
+    padding: '20px',
   },
   notSelected: {
     backgroundColor: 'white',
-    padding: '20px'
+    padding: '20px',
   },
 }))
 

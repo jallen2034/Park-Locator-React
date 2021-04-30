@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     height: '100vh',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   parkList: {
     overflowY: 'scroll',
     width:'550px',
     float: 'left',
-    height:'100vh',
+    height:'95vh',
     position:'relative',
   },
   map: {

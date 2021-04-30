@@ -4,14 +4,26 @@ import Button from '../Button'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 260,
+    margin: '20px',
+    borderRadius: 10
+  }
+});
 
 /* SimpleDialog component 
  * https://material-ui.com/components/dialogs/
  * https://material-ui.com/customization/components/ */
 const SimpleDialog = function ({ open, handleClose, data, name }) {
+  const classes = useStyles()
   const closeDialog = () => {
     handleClose()
   }
@@ -21,17 +33,21 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
       <DialogTitle id="simple-dialog-title">Reviews For {name}</DialogTitle>
       <List>
         {data.map((review) => (
-          <div>
-            <ListItem>
-              <ListItemText primary={review.review_author} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={review.review_rating} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={review.review_text} />
-            </ListItem>
-          </div>
+            <div>
+              <Card className={classes.root} variant="outlined">
+                <CardContent>
+                  <ListItem>
+                    <ListItemText primary={review.review_author} />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText primary={review.review_rating} />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText primary={review.review_text} />
+                  </ListItem>
+                </CardContent>
+              </Card>
+            </div>
         ))}
       </List>
     </Dialog>
@@ -66,6 +82,8 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
     if (parkDiv.current && selected) {
       parkDiv.current.scrollIntoView({
         behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
       })
     }
   }, [selected, parkDiv])
