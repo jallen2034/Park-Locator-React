@@ -8,9 +8,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios'
 
-// SimpleDialog component
+/* SimpleDialog component 
+ * https://material-ui.com/components/dialogs/
+ * https://material-ui.com/customization/components/ */
 const SimpleDialog = function ({ open, handleClose, data, name }) {
-
   const closeDialog = () => {
     handleClose()
   }
