@@ -19,7 +19,7 @@ const reshapeParkData = function (value) {
   return reshapedObjectOfParks
 }
 
-// POST route to fetch reviews for all skateparks in vancouver from database
+// GET route to fetch reviews for all skateparks in vancouver from database
 reviewsRoute.get("/", (req, res) => {
   let reviews = retrieveReviews()
   reviews

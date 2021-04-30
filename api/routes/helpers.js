@@ -106,6 +106,27 @@ const retrieveReviews = function () {
     })
 }
 
+// helper function to hit our database and retrieve reviews just for one park the user selects on the map
+const retrieveIndividualReview = function (place_id) {
+  const parameters = [place_id] 
+  const query = `
+    SELECT name, all_skateparks.place_id, review_author, review_rating, review_text 
+    FROM all_skateparks
+    JOIN reviews
+    ON all_skateparks.place_id = reviews.place_id
+    WHERE all_skateparks.place_id = $1
+  `
+
+  return db.query(query, parameters)
+    .then(res => {
+      console.log(res.rows)
+      return res.rows
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
+}
+
 // helper to get all skateparks to display on the map/index page
 const retrieveParksForMap = function () {
   const query = `
@@ -248,6 +269,7 @@ module.exports = {
   addUserToDb,
   validUsernamePassword,
   retrieveReviews,
+  retrieveIndividualReview,
   retrieveParksForMap,
   usersSavedParks,
   getUserId,
