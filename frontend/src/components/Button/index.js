@@ -23,7 +23,7 @@ const addToSavedParks = function(place_id, currentUser) {
   })
 }
 
-const MyParksButton = ({ place_id, currentUser }) => {
+const MyParksButton = ({ place_id, currentUser, handleClickOpen }) => {
   const classes = useStyles()
   return (
     <div>
@@ -36,7 +36,12 @@ const MyParksButton = ({ place_id, currentUser }) => {
         >
          Add to my parks
        </Button>
-       <Button variant="contained" color="default" disableElevation>
+       <Button 
+        variant="contained" 
+        color="default" 
+        disableElevation
+        onClick={(e) => handleClickOpen(place_id)}       
+        >
          Reviews
        </Button>
     </div>
