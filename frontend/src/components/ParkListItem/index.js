@@ -16,7 +16,15 @@ const useStyles = makeStyles({
     minWidth: 260,
     margin: '20px',
     borderRadius: 10
-  }
+  },
+  selected: {
+    backgroundColor: '#e6e6e6',
+    padding: '20px',
+  },
+  notSelected: {
+    backgroundColor: 'white',
+    padding: '20px',
+  },
 });
 
 /* SimpleDialog component 
@@ -55,7 +63,8 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
 }
 
 // park ListItem component
-const ParkListItem = ({ place_id, name, formattedAddress, phone, website, currentUser, selected }) => {
+const ParkListItem = ({ place_id, name, formattedAddress, phone, website, currentUser, selected, selectedStyle, listItemClick, setClickedPark, setMapCenter, setClickedParkInList, location_lat, location_long }) => {
+  const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [data, setData] = useState(null)
   const parkDiv = useRef(null)
@@ -88,31 +97,14 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
     }
   }, [selected, parkDiv])
 
-  if (data) {
-    return (
-      <div id={place_id} ref={parkDiv}>
-        <ParkData
-          name={name}
-          formattedAddress={formattedAddress}
-          phone={phone}
-          website={website}
-        />
-        <Button
-          place_id={place_id}
-          currentUser={currentUser}
-          onClick={handleClickOpen}
-        />
-        <SimpleDialog
-          open={open}
-          handleClose={handleClose}
-          data={data}
-          name={name}
-        />
-      </div>
-    )
-  } else {
-    return (
-      <div id={place_id} ref={parkDiv}>
+  return (
+    <div
+      ref={parkDiv}
+      place_id={place_id} 
+      onClick={(event) => listItemClick(event, place_id, setClickedPark, setMapCenter, location_lat, location_long, setClickedParkInList)}
+      className={(selected === true || selectedStyle === true) ? classes.selected : classes.notSelected}
+    >
+      <div id={place_id}>
         <ParkData
           name={name}
           formattedAddress={formattedAddress}
@@ -124,9 +116,15 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
           currentUser={currentUser}
           handleClickOpen={handleClickOpen}
         />
+        {data && <SimpleDialog
+          open={open}
+          handleClose={handleClose}
+          data={data}
+          name={name}
+        />}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default ParkListItem

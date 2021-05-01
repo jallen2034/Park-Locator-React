@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100vh',
+    height: '100%',
     overflow: 'hidden',
   },
   parkList: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     position:'relative',
   },
   map: {
-    marginTop: '250px',
+    // marginTop: '250px',
   }
 }))
 
@@ -54,7 +54,7 @@ const HomePage = ({ currentUser }) => {
           setClickedParkInList={setClickedParkInList}
         />
       </div>
-      <div classname={classes.map}>
+      <div className={classes.map}>
         <Map
           parksForMap={parksForMap}
           setClickedPark={setClickedPark}
