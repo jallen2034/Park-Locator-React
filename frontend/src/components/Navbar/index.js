@@ -7,6 +7,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
     height: '64px',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  menuButtons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginLeft: '15px'
+  },
+  actionButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: '22px'
   },
   toolbar: {
     height: '64px'
@@ -49,24 +63,28 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
           <Typography variant="h6" className={classes.title}>
             Park Locator
           </Typography>
-          <Button color="inherit">
-            <Link to="/" className={classes.button}>Homepage</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/userSavedParks" className={classes.button}>My Saved Parks</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/reviews" className={classes.button}>Reviews</Link>
-          </Button>
-          <Button 
-            color="inherit"
-            onClick={() =>
-              buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
-            }
-          >
-            <Link to="/" className={classes.button}>{buttonStatus}</Link>
-          </Button>
+          <div className={classes.menuButtons}>
+            <Button color="inherit">
+              <Link to="/" className={classes.button}>Homepage</Link>
+            </Button>
+            <Button color="inherit">
+              <Link to="/userSavedParks" className={classes.button}>My Saved Parks</Link>
+            </Button>
+            <Button color="inherit">
+              <Link to="/reviews" className={classes.button}>Reviews</Link>
+            </Button>
+          </div>
         </Toolbar>
+          <div className={classes.actionButton}>
+            <Button 
+              color="inherit"
+              onClick={() =>
+                buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+              }
+            >
+              <Link to="/" className={classes.button}>{buttonStatus}</Link>
+            </Button>
+          </div>
       </AppBar>
     )
   } else {
