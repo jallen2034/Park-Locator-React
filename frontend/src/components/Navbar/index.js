@@ -71,7 +71,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
               <Link to="/userSavedParks" className={classes.button}>My Saved Parks</Link>
             </Button>
             <Button color="inherit">
-              <Link to="/reviews" className={classes.button}>Reviews</Link>
+              <Link to="/reviews" className={classes.button}>All Reviews</Link>
             </Button>
           </div>
         </Toolbar>
