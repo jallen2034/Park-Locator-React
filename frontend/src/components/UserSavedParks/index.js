@@ -11,7 +11,10 @@ const useStyles = makeStyles({
     maxWidth: '65%',
     minWidth: '61%',
     margin: '20px',
-    borderRadius: 10
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "#f5f5f5"
+    }
   },
   // this shit is not applying
   flex: {
@@ -77,7 +80,7 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks }) =>
     return (
       <div className={classes.flexTitle}>
         <Typography variant='h4' className={classes.h4}>
-          Please add some saved parks in here!
+          You haven't favourited any Skateparks! Add some saved parks in here!
         </Typography>
       </div>
     )

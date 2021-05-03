@@ -14,15 +14,21 @@ const useStyles = makeStyles({
   root: {
     minWidth: 260,
     margin: '20px',
-    borderRadius: 10
+    borderRadius: 10,
+    "&:hover": {
+      backgroundColor: "#f7f7f7"
+    }
   },
   selected: {
     backgroundColor: '#e6e6e6',
-    padding: '20px'
+    padding: '20px',
   },
   notSelected: {
     backgroundColor: 'white',
     padding: '20px',
+    "&:hover": {
+      backgroundColor: "#f7f7f7"
+    }
   },
   h4: {
     fontSize: '24px',
@@ -31,7 +37,7 @@ const useStyles = makeStyles({
   h5: {
     fontSize: '18px',
     fontWeight: 'bold',
-    padding: '10px'
+    padding: '10px',
   },
   h6: {
     fontSize: '16px',

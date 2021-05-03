@@ -8,12 +8,17 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: '25px',
     paddingRight: '25px',
+  },
+  cardContent: {
+    "&:hover": {
+      backgroundColor: "#f5f5f5"
+    },
     marginTop: '20px',
     marginBottom: '20px',
-    borderRadius: 12
+    borderRadius: 12,
   },
   h4: {
-    fontSize: '24px',
+    fontSize: '24px'
   },
   h5: {
     fontSize: '18px',
@@ -33,8 +38,8 @@ const IndividualReview = ({ review }) => {
   const classes = useStyles()
 
   return (
-    <Card variant="outlined" className={classes.root}>
-      <CardContent>
+    <Card variant="outlined" className={classes.cardContent}>
+      <CardContent className={classes.cardContent}>
         <Typography variant='h5' className={classes.h5}>
           {review.review_author}
         </Typography>
