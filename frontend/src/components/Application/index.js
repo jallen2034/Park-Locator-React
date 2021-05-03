@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRegister }) => {
+const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRegister, clickedPark, setClickedPark, clickedParkInList, setClickedParkInList, mapCenter, setMapCenter }) => {
   const classes = useStyles()
- 
+
   if (!register && !currentUser.uuid) {
     return (
       <div>
@@ -57,7 +57,15 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
           setCurrentUser={setCurrentUser}
         />
         <div style={{marginTop: "64px"}}>
-          <HomePage currentUser={currentUser}/>
+          <HomePage 
+            currentUser={currentUser}
+            clickedPark={clickedPark}
+            setClickedPark={setClickedPark}
+            clickedParkInList={clickedParkInList}
+            setClickedParkInList={setClickedParkInList}
+            mapCenter={mapCenter}
+            setMapCenter={setMapCenter}
+          />
         </div>
       </div>
     )

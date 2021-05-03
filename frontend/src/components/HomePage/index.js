@@ -30,12 +30,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const HomePage = ({ currentUser }) => {
+const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList, setClickedParkInList, mapCenter, setMapCenter }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState([])
-  const [clickedPark, setClickedPark] = useState('')
-  const [clickedParkInList, setClickedParkInList] = useState('')
-  const [mapCenter, setMapCenter] = useState([49.282, -123.120])
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
