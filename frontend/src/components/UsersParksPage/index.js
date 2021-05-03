@@ -20,7 +20,7 @@ const retrieveUsersSavedParks = function (currentUser, setUsersSavedParks) {
     })
 }
 
-const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, setRegister, setClickedPark, setMapCenter }) => {
+const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, setRegister, setClickedPark, setMapCenter, setClickedParkInList }) => {
   const classes = useStyles()
   const [usersSavedParks, setUsersSavedParks] = useState({})
 
@@ -45,6 +45,7 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
             setUsersSavedParks={setUsersSavedParks}
             setClickedPark={setClickedPark}
             setMapCenter={setMapCenter}
+            setClickedParkInList={setClickedParkInList}
           />
         </div>
     </>

@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   }
 });
 
-const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setClickedPark, setMapCenter }) => {
+const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setClickedPark, setMapCenter, setClickedParkInList }) => {
   let savedParks
   const classes = useStyles()
 
@@ -56,6 +56,7 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
                 setUsersSavedParks={setUsersSavedParks}
                 setClickedPark={setClickedPark}
                 setMapCenter={setMapCenter}
+                setClickedParkInList={setClickedParkInList}
               />
             </CardContent>
           </Card>

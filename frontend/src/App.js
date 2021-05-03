@@ -32,6 +32,7 @@ function App() {
               setRegister={setRegister}
               setClickedPark={setClickedPark}
               setMapCenter={setMapCenter}
+              setClickedParkInList={setClickedParkInList}
             />
           </Route>
           <Route path="/reviews">
