@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12
   },
   h4: {
-    fontSize: '26px',
+    fontSize: '24px',
   },
   h5: {
     fontSize: '18px',
