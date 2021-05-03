@@ -127,6 +127,26 @@ const retrieveIndividualReview = function (place_id) {
     })
 }
 
+// helper function to retrieve an individual parks location when a user clicks the 'go to on map' button
+const retrieveIndParkLocation = function (place_id) {
+  const parameters = [place_id]
+  const query = `
+    SELECT location_lat, location_long
+    FROM all_skateparks
+    JOIN skatepark_location
+    ON all_skateparks.place_id = skatepark_location.place_id
+    WHERE all_skateparks.place_id = $1
+  `
+  return db.query(query, parameters)
+    .then(res => {
+      const skateparksForMap = res.rows
+      return skateparksForMap
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
+}
+
 // helper to get all skateparks to display on the map/index page
 const retrieveParksForMap = function () {
   const query = `
@@ -270,6 +290,7 @@ module.exports = {
   validUsernamePassword,
   retrieveReviews,
   retrieveIndividualReview,
+  retrieveIndParkLocation,
   retrieveParksForMap,
   usersSavedParks,
   getUserId,
