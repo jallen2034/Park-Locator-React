@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     margin: '20px',
     borderRadius: 10,
     "&:hover": {
-      backgroundColor: "#f7f7f7"
+      backgroundColor: "#f8f8f8"
     }
   },
   selected: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
     padding: '20px',
     "&:hover": {
-      backgroundColor: "#f7f7f7"
+      backgroundColor: "#f8f8f8"
     }
   },
   h4: {

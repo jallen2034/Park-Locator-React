@@ -24,8 +24,6 @@ const ReviewParkList = ({ reviews }) => {
     ) 
   }
 
-  console.log("parkReviews array of reviews: ", parkReviews)
-
   return (
     <div className={classes.root}>
       {parkReviews}

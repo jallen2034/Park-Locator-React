@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     margin: '20px',
     borderRadius: 10,
     "&:hover": {
-      backgroundColor: "#f5f5f5"
+      backgroundColor: "#f8f8f8"
     }
   },
   // this shit is not applying

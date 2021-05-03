@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     "&:hover": {
-      backgroundColor: "#f5f5f5"
+      backgroundColor: "#f8f8f8"
     },
     marginTop: '20px',
     marginBottom: '20px',
