@@ -16,7 +16,6 @@ const useStyles = makeStyles({
       backgroundColor: "#f8f8f8"
     }
   },
-  // this shit is not applying
   flex: {
     display: 'flex',
     flexDirection: 'row',
