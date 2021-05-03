@@ -9,6 +9,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '15px',
     marginRight: '15px',
     marginBottom: '15px'
+  },
+  button: {
+    backgroundColor: '#898a91',
+    color: 'white',
+    "&:hover": {
+      backgroundColor: "#5e5e5e"
+    }
   }
 }))
 
@@ -38,7 +45,8 @@ const MyParksButton = ({ place_id, currentUser, handleClickOpen }) => {
         >
          Add to my parks
        </Button>
-       <Button 
+       <Button
+        className={classes.button} 
         variant="contained" 
         color="default" 
         disableElevation
