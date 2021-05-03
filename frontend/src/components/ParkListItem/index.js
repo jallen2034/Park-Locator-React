@@ -2,14 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import ParkData from '../ParkData'
 import Button from '../Button'
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
   root: {
@@ -19,17 +18,30 @@ const useStyles = makeStyles({
   },
   selected: {
     backgroundColor: '#e6e6e6',
-    padding: '20px',
+    padding: '20px'
   },
   notSelected: {
     backgroundColor: 'white',
     padding: '20px',
   },
+  h4: {
+    fontSize: '24px',
+    padding: '15px'
+  },
+  h5: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    padding: '10px'
+  },
+  h6: {
+    fontSize: '16px',
+    padding: '10px'
+  }
 });
 
 /* SimpleDialog component 
- * https://material-ui.com/components/dialogs/
- * https://material-ui.com/customization/components/ */
+ * https://material-ui.com/components/dialogs
+ * https://material-ui.com/customization/components */
 const SimpleDialog = function ({ open, handleClose, data, name }) {
   const classes = useStyles()
   const closeDialog = () => {
@@ -38,21 +50,23 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
 
   return (
     <Dialog onClose={closeDialog} open={open}>
-      <DialogTitle id="simple-dialog-title">Reviews For {name}</DialogTitle>
+      <Typography variant='h4' className={classes.h4}>
+        Reviews For {name}
+      </Typography>
       <List>
         {data.map((review) => (
             <div>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
-                  <ListItem>
-                    <ListItemText primary={review.review_author} />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary={review.review_rating} />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary={review.review_text} />
-                  </ListItem>
+                  <Typography variant='h5' className={classes.h5}>
+                    {review.review_author}
+                  </Typography>
+                  <Typography variant='h6' className={classes.h6}>
+                    {review.review_rating} Stars
+                  </Typography>
+                  <Typography variant='h6' className={classes.h6}>
+                    {review.review_text}
+                  </Typography>
                 </CardContent>
               </Card>
             </div>

@@ -53,7 +53,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
             <Link to="/" className={classes.button}>Homepage</Link>
           </Button>
           <Button color="inherit">
-            <Link to="/userSavedParks" className={classes.button}>User Saved Parks</Link>
+            <Link to="/userSavedParks" className={classes.button}>My Saved Parks</Link>
           </Button>
           <Button color="inherit">
             <Link to="/reviews" className={classes.button}>Reviews</Link>

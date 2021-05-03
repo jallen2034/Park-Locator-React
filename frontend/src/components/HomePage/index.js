@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   parkList: {
     overflowY: 'scroll',
-    width:'550px',
+    width:'580px',
     float: 'left',
     height:'95vh',
     position:'relative',

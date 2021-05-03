@@ -1,25 +1,50 @@
 import React from 'react'
 import ParkData from '../ParkData'
 import UserSavedParksButton from '../Button/index.2'
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography'
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: '65%',
+    minWidth: '60%',
+    margin: '20px',
+    borderRadius: 10
+  },
+  // this shit is not applying
+  flex: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  }
+});
 
 const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks }) => {
   let savedParks
+  const classes = useStyles()
 
   if (usersSavedParks.length > 0) {
     savedParks = usersSavedParks.map(({ place_id, name, formattedAddress, phone, website }) => {
       return (
-        <div>
-          <ParkData
-            name={name}
-            formattedAddress={formattedAddress}
-            phone={phone}
-            website={website}
-          />
-          <UserSavedParksButton 
-            currentUser={currentUser} 
-            place_id={place_id} 
-            setUsersSavedParks={setUsersSavedParks}
-          />
+        // to here >:((
+        <div id="test" className={classes.flex}>
+          <Card className={classes.root} variant="outlined">
+            <CardContent>
+              <ParkData
+                name={name}
+                formattedAddress={formattedAddress}
+                phone={phone}
+                website={website}
+              />
+              <UserSavedParksButton 
+                currentUser={currentUser} 
+                place_id={place_id} 
+                setUsersSavedParks={setUsersSavedParks}
+              />
+            </CardContent>
+          </Card>
         </div>
       )
     })
@@ -34,7 +59,9 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks }) =>
   } else {
     return (
       <div>
-        Loading
+        <Typography variant='h4' className={classes.h4}>
+          Please add some saved parks in here!
+        </Typography>
       </div>
     )
   }
