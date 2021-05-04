@@ -49,6 +49,7 @@ const useStyles = makeStyles({
  * https://material-ui.com/components/dialogs
  * https://material-ui.com/customization/components */
 const SimpleDialog = function ({ open, handleClose, data, name }) {
+  console.log("data with photo info: ", data)
   const classes = useStyles()
   const closeDialog = () => {
     handleClose()
@@ -73,6 +74,13 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
                   <Typography variant='h6' className={classes.h6}>
                     {review.review_text}
                   </Typography>
+                  <Card variant="outlined">
+                    <CardContent>
+                      <div>
+                        Test test test
+                      </div>
+                    </CardContent>
+                  </Card>
                 </CardContent>
               </Card>
             </div>
@@ -87,13 +95,18 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [data, setData] = useState(null)
+  const [mapsApiKey, setMapsApiKey] = useState('')
   const parkDiv = useRef(null)
+
+  console.log("mapsApiKey", mapsApiKey)
 
   // helper to fetch individal review from park - note this mutates state - TODO fix
   const handleClickOpen = function (place_id) {
     axios.put("http://localhost:5000/individualReviews", { place_id })
       .then((response) => {
-        const apiData = response.data
+        const apiData = response.data.resRows
+        const apiKey = response.data.key
+        setMapsApiKey(apiKey)
         setData(apiData)
         setOpen(true)
       })

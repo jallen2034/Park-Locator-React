@@ -5,10 +5,9 @@ const { addSavedParkForUser, getUserId, getParkName, parkVerification } = requir
 // POST route/backend logic to handle the users saved parks
 addSavedParksRoute.put("/", (req, res) => {
   const { place_id, currentUser } = req.body
-  
+
   let getUsersId = getUserId(currentUser.uuid)
   getUsersId.then((value) => {
-    console.log("value: ", value)
 
     if (value.length > 0) {
       return parkVerification(place_id, value)

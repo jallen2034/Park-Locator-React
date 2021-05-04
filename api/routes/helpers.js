@@ -1,6 +1,7 @@
 // db uses plaintext passwords - BAD! TODO - fix using bcrypt before publishing to production
 const { db } = require('../db/db');
 const bcrypt = require('bcrypt');
+const key = require('./apiKey')
 
 /* helper function to generate a 6 char random string, this is not my own implementation, all credit goes to its creator:
    https://stackoverflow.com/questions/16106701/how-to-generate-a-random-string-of-letters-and-numbers-in-javascript */
@@ -108,19 +109,22 @@ const retrieveReviews = function () {
 
 // helper function to hit our database and retrieve reviews just for one park the user selects on the map
 const retrieveIndividualReview = function (place_id) {
+  console.log("key:", key)
+  console.log("place_id: ", place_id)
   const parameters = [place_id] 
   const query = `
-    SELECT name, all_skateparks.place_id, review_author, review_rating, review_text 
+    SELECT name, all_skateparks.place_id, review_author, review_author_url, review_rating, review_text, height, width, html_attribute, photoref
     FROM all_skateparks
     JOIN reviews
     ON all_skateparks.place_id = reviews.place_id
+    JOIN PHOTOS
+    ON all_skateparks.place_id = photos.place_id
     WHERE all_skateparks.place_id = $1
   `
 
   return db.query(query, parameters)
     .then(res => {
-      console.log(res.rows)
-      return res.rows
+      return {resRows: res.rows, key: key}
     })
     .catch(error => {
       console.log("Error: ", error)
@@ -268,8 +272,12 @@ const parkVerification = function (place_id, currentUser) {
   `
   return db.query(query, parameters)
   .then(res => {
+
+    console.log("Got here first: ")
     
     if (res.rows.length === 0) return { false: false, currentUser: currentUser }
+
+    console.log("Got here: ")
 
     for (index of res.rows) {
       if (index.place_id === place_id) {
