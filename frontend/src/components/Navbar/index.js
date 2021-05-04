@@ -8,22 +8,27 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     height: '64px',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: '#384da1'
+  },
+  login: {
+    backgroundColor: '#384da1'
   },
   menuButtons: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: '15px'
+    marginLeft: '15px',
   },
   actionButton: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginRight: '22px'
+    alignItems: 'center',
+    marginRight: '22px',
   },
   toolbar: {
-    height: '64px'
+    // backgroundColor: 'orange'
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -34,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     textDecoration: 'none',
     color: 'white'
+  },
+  testButton: {
+    backgroundColor: 'orange'
   }
 }))
 
@@ -43,7 +51,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser)
   if (buttonStatus === 'Logout') {
     setRegister(false)
     setKey(false)
-    setCurrentUser({uuid: null})
+    setCurrentUser((prev) => ({...prev, uuid: null}))
     window.localStorage.removeItem('Uuid')
   } else if (buttonStatus === 'Login') {
     setRegister(false)
@@ -76,20 +84,25 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
           </div>
         </Toolbar>
           <div className={classes.actionButton}>
-            <Button 
+            <Button
               color="inherit"
-              onClick={() =>
-                buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
-              }
             >
-              <Link to="/" className={classes.button}>{buttonStatus}</Link>
+              <Link 
+                to="/" 
+                className={classes.button}
+                onClick={() =>
+                  buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+                }
+              >
+                {buttonStatus}
+              </Link>
             </Button>
           </div>
       </AppBar>
     )
   } else {
     return (
-      <AppBar position="static">
+      <AppBar position="static" className={classes.login}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Park Locator
