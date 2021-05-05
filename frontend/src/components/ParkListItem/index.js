@@ -62,31 +62,43 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
       </Typography>
       <List>
         {data.map((review) => (
-            <div>
-              <Card className={classes.root} variant="outlined">
-                <CardContent>
-                  <Typography variant='h5' className={classes.h5}>
-                    {review.review_author}
+          <div>
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography variant='h5' className={classes.h5}>
+                  {review.review_author}
+                </Typography>
+                <Typography variant='h6' className={classes.h6}>
+                  {review.review_rating} Stars
                   </Typography>
-                  <Typography variant='h6' className={classes.h6}>
-                    {review.review_rating} Stars
-                  </Typography>
-                  <Typography variant='h6' className={classes.h6}>
-                    {review.review_text}
-                  </Typography>
-                  <Card variant="outlined">
+                <Typography variant='h6' className={classes.h6}>
+                  {review.review_text}
+                </Typography>
+                <Card variant="outlined">
+                  {review.photos.length > 0 ? (
                     <CardContent>
                       <div>
-                        Test test test
+                        {review.photos.map((photo) => (
+                          <div>
+                            { console.log(photo.html_attribute)}
+                            { console.log(photo.photoref)}
+                            <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photoref}&key=AIzaSyDCN-4EbKXqQPJbjI8c1rfxNVD2uoaqLqk`} alt="Girl in a jacket" width="300" height="200"></img>
+                          </div>
+                        ))}
                       </div>
                     </CardContent>
-                  </Card>
-                </CardContent>
-              </Card>
-            </div>
+                  ) : (
+                    <>
+                      <h3>Hello</h3>
+                    </>
+                  )}
+                </Card>
+              </CardContent>
+            </Card>
+          </div>
         ))}
       </List>
-    </Dialog>
+    </Dialog >
   )
 }
 
@@ -97,7 +109,6 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
   const [data, setData] = useState(null)
   const [mapsApiKey, setMapsApiKey] = useState('')
   const parkDiv = useRef(null)
-
   console.log("mapsApiKey", mapsApiKey)
 
   // helper to fetch individal review from park - note this mutates state - TODO fix
@@ -133,7 +144,7 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
   return (
     <div
       ref={parkDiv}
-      place_id={place_id} 
+      place_id={place_id}
       onClick={(event) => listItemClick(event, place_id, setClickedPark, setMapCenter, location_lat, location_long, setClickedParkInList)}
       className={(selected === true || selectedStyle === true) ? classes.selected : classes.notSelected}
     >
