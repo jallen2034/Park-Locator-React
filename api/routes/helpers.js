@@ -109,8 +109,6 @@ const retrieveReviews = function () {
 
 // helper function to hit our database and retrieve reviews just for one park the user selects on the map
 const retrieveIndividualReview = function (place_id) {
-  console.log("key:", key)
-  console.log("place_id: ", place_id)
   const parameters = [place_id]
   const query = `
     SELECT name, all_skateparks.place_id, review_author, review_author_url, review_rating, review_text, height, width, html_attribute, photoref
