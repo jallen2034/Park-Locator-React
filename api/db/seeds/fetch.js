@@ -25,7 +25,6 @@
       )
       VALUES ($1, $2, $3, $4, $5)
     `;
-
     await db.query(query, paramaters);
   }
 
@@ -163,8 +162,6 @@
     }
   }
 
-  console.log("process.env.KEY: ", process.env.KEY)
-
   // hit API to get back our skateparks
   const places = await client
     .placesNearby({
@@ -177,7 +174,6 @@
       timeout: 1000, // milliseconds
     })
     .then((r) => {
-      console.log("GOT HERE: ")
       return r.data;
     })
 

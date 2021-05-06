@@ -26,6 +26,7 @@ const reshapeData = function (value) {
       })
     }
 
+    // add photos for each park for each user - runs in n2 time - bad :((
     for (const reshapedIndex in reshapedArray) {
 
       if (value.resRows[index].review_author_url === reshapedArray[reshapedIndex].review_author_url) {
@@ -35,7 +36,6 @@ const reshapeData = function (value) {
           html_attribute: value.resRows[index].html_attribute,
           photoref: value.resRows[index].photoref
         })
-
       }
     }
   }
