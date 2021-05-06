@@ -48,6 +48,10 @@ const useStyles = makeStyles({
     overflowX: 'auto',
     marginLeft: '20px',
     marginRight: '20px',
+  },
+  image: {
+    marginLeft: '10px',
+    marginRight: '10px',
     borderRadius: 10,
   }
 });
@@ -56,7 +60,6 @@ const useStyles = makeStyles({
  * https://material-ui.com/customization/components
  * https://developers.google.com/maps/documentation/places/web-service/photos */
 const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
-  console.log("data with photo info: ", data)
   const classes = useStyles()
   const closeDialog = () => {
     handleClose()
@@ -67,14 +70,11 @@ const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
       <Typography variant='h4' className={classes.h4}>
         Reviews For {name}
       </Typography>
-      <div>
-        {console.log("DATA", data[0].photos)}
-      </div>
       <List>
         <div className={classes.photos}>
           {data[0].photos.map((photo) => (
             <div>
-              <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photoref}&key=${mapsApiKey}`} alt="Girl in a jacket" width="300" height="200"></img>
+              <img className={classes.image} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}></img>
             </div>
           ))}
         </div>
@@ -107,7 +107,6 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
   const [data, setData] = useState(null)
   const [mapsApiKey, setMapsApiKey] = useState('')
   const parkDiv = useRef(null)
-  console.log("mapsApiKey", mapsApiKey)
 
   // helper to fetch individal review from park - note this mutates state - TODO fix
   const handleClickOpen = function (place_id) {

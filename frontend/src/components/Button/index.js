@@ -19,40 +19,40 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const addToSavedParks = function(place_id, currentUser) {
+const addToSavedParks = function (place_id, currentUser) {
   const error = "Sorry, you already added this saved park!"
   axios.put("http://localhost:5000/addSavedPark", { place_id, currentUser })
-  .then((response) => {
+    .then((response) => {
 
-    if (response.data === error) {
-      toast.error(error)
-    } else {
-      toast.success(`${response.data} has been successfully added to your saved parks list!`)
-    }
-  })
+      if (response.data === error) {
+        toast.error(error)
+      } else {
+        toast.success(`${response.data} has been successfully added to your saved parks list!`)
+      }
+    })
 }
 
 const MyParksButton = ({ place_id, currentUser, handleClickOpen }) => {
   const classes = useStyles()
   return (
     <div>
-       <Button
+      <Button
         className={classes.root}
-        variant="contained" 
-        color="primary" 
+        variant="contained"
+        color="primary"
         disableElevation
         onClick={(e) => addToSavedParks(place_id, currentUser)}
-        >
-         Add to my parks
+      >
+        Add to my parks
        </Button>
-       <Button
-        className={classes.button} 
-        variant="contained" 
-        color="default" 
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="default"
         disableElevation
-        onClick={(e) => handleClickOpen(place_id)}       
-        >
-         Reviews
+        onClick={(e) => handleClickOpen(place_id)}
+      >
+        Reviews
        </Button>
     </div>
   )
