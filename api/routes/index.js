@@ -5,17 +5,17 @@ const { retrieveParksForMap } = require('./helpers')
 indexRoute.get("/", (req, res) => {
   let skateparkList = retrieveParksForMap()
   skateparkList
-  .then((value) => {
+    .then((value) => {
 
-    if (value) {
-      res.send(value)
-    } else {
-      throw new Error('error grabbing parks')
-    }
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+      if (value) {
+        res.send(value)
+      } else {
+        throw new Error('error grabbing parks')
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 // export module

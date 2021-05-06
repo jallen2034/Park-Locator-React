@@ -6,8 +6,8 @@
   const { client } = require('../../mapsApi');
   await require('../schema/dbReset')();
 
- /* helper functions
-  * insert allparks information into my all_skateparks table */
+  /* helper functions
+   * insert allparks information into my all_skateparks table */
   const insertAllParks = async function (placeDetails, db) {
     const placeId = placeDetails.result.place_id;
     const name = placeDetails.result.name;
@@ -98,7 +98,7 @@
   const insertOpeningHours = async function (placeDetails, db) {
     const placeId = placeDetails.result.place_id;
     const openingHours = placeDetails.result.opening_hours;
-    
+
     if (openingHours) {
       const weekdayList = openingHours.weekday_text;
 
@@ -163,6 +163,8 @@
     }
   }
 
+  console.log("process.env.KEY: ", process.env.KEY)
+
   // hit API to get back our skateparks
   const places = await client
     .placesNearby({
@@ -175,6 +177,7 @@
       timeout: 1000, // milliseconds
     })
     .then((r) => {
+      console.log("GOT HERE: ")
       return r.data;
     })
 

@@ -2,29 +2,12 @@ const express = require("express")
 const individualReviewRoute = express.Router()
 const { retrieveIndividualReview } = require('./helpers')
 
-// reshape our park review data so each review has multiple photos vs being duplicated from our db - bandaid and slow - TODO fix later
+// reshape our park review data so each review has multiple photos vs being duplicated from our db - bandaid and slow - janky AF - TODO fix later
 const reshapeData = function (value) {
   const key = value.key
   let reshapedObjectOfParks = {}
   const parkCache = []
   const reshapedArray = []
-
-  /* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions 
-   * https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match */
-  const escapeRegExp = function (string) {
-    console.log("string before regex: ", string)
-    const regex = /(?<=(["']\b))(?:(?=(\\?))\2.)*?(?=\1)/g
-    const found = string.match(regex)
-    console.log(found)
-    return found[0]
-  }
-
-  // loop through .html_attribute and use regex to take out everything between the quotations
-  for (const index in value.resRows) {
-    const splicedHtmlAttribute = escapeRegExp(value.resRows[index].html_attribute)
-    value.resRows[index].html_attribute = splicedHtmlAttribute
-  }
 
   // create inital non-duplicated reviews with an empty array to store photos
   for (const index in value.resRows) {
@@ -42,19 +25,17 @@ const reshapeData = function (value) {
         photos: []
       })
     }
-  }
 
-  // now fill the photos into the new reshaped array. this runs in n2 time. Bad :((
-  for (const resIndex in value.resRows) {
     for (const reshapedIndex in reshapedArray) {
 
-      if (value.resRows[resIndex].review_author_url === reshapedArray[reshapedIndex].review_author_url) {
+      if (value.resRows[index].review_author_url === reshapedArray[reshapedIndex].review_author_url) {
         reshapedArray[reshapedIndex].photos.push({
-          height: value.resRows[resIndex].height,
-          width: value.resRows[resIndex].width,
-          html_attribute: value.resRows[resIndex].html_attribute,
-          photoref: value.resRows[resIndex].photoref
+          height: value.resRows[index].height,
+          width: value.resRows[index].width,
+          html_attribute: value.resRows[index].html_attribute,
+          photoref: value.resRows[index].photoref
         })
+
       }
     }
   }

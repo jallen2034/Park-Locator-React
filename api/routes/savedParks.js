@@ -7,17 +7,17 @@ savedParksRoute.put("/", (req, res) => {
   const { uuid } = req.body
   let userSavedParksList = usersSavedParks(uuid)
   userSavedParksList
-  .then((value) => {
+    .then((value) => {
 
-    if (value) {
-      res.send(value)
-    } else {
-      throw new Error('error grabbing parks')
-    }
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+      if (value) {
+        res.send(value)
+      } else {
+        throw new Error('error grabbing parks')
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 // export module

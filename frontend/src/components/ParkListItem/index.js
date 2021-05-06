@@ -4,7 +4,6 @@ import Button from '../Button'
 import List from '@material-ui/core/List';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,13 +41,21 @@ const useStyles = makeStyles({
   h6: {
     fontSize: '16px',
     padding: '10px'
+  },
+  photos: {
+    display: 'flex',
+    flexDirection: 'row',
+    overflowX: 'auto',
+    marginLeft: '20px',
+    marginRight: '20px',
+    borderRadius: 10,
   }
 });
 
-/* SimpleDialog component 
- * https://material-ui.com/components/dialogs
- * https://material-ui.com/customization/components */
-const SimpleDialog = function ({ open, handleClose, data, name }) {
+/* SimpleDialog component - can display photos for each park review using the google places API for photos. Needs a dynamic photoref and api key from backend
+ * https://material-ui.com/customization/components
+ * https://developers.google.com/maps/documentation/places/web-service/photos */
+const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
   console.log("data with photo info: ", data)
   const classes = useStyles()
   const closeDialog = () => {
@@ -60,7 +67,17 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
       <Typography variant='h4' className={classes.h4}>
         Reviews For {name}
       </Typography>
+      <div>
+        {console.log("DATA", data[0].photos)}
+      </div>
       <List>
+        <div className={classes.photos}>
+          {data[0].photos.map((photo) => (
+            <div>
+              <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photoref}&key=${mapsApiKey}`} alt="Girl in a jacket" width="300" height="200"></img>
+            </div>
+          ))}
+        </div>
         {data.map((review) => (
           <div>
             <Card className={classes.root} variant="outlined">
@@ -74,25 +91,6 @@ const SimpleDialog = function ({ open, handleClose, data, name }) {
                 <Typography variant='h6' className={classes.h6}>
                   {review.review_text}
                 </Typography>
-                <Card variant="outlined">
-                  {review.photos.length > 0 ? (
-                    <CardContent>
-                      <div>
-                        {review.photos.map((photo) => (
-                          <div>
-                            { console.log(photo.html_attribute)}
-                            { console.log(photo.photoref)}
-                            <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photoref}&key=AIzaSyDCN-4EbKXqQPJbjI8c1rfxNVD2uoaqLqk`} alt="Girl in a jacket" width="300" height="200"></img>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  ) : (
-                    <>
-                      <h3>Hello</h3>
-                    </>
-                  )}
-                </Card>
               </CardContent>
             </Card>
           </div>
@@ -165,6 +163,7 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
           handleClose={handleClose}
           data={data}
           name={name}
+          mapsApiKey={mapsApiKey}
         />}
       </div>
     </div>

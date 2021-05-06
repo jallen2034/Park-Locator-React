@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UsersParksPage from '../src/components/UsersParksPage'
 import ReviewPage from '../src/components/ReviewPage'
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 // app component
 function App() {
@@ -23,8 +23,8 @@ function App() {
       <Router>
         <Switch>
           <Route path="/userSavedParks">
-            <UsersParksPage 
-              currentUser={currentUser} 
+            <UsersParksPage
+              currentUser={currentUser}
               setCurrentUser={setCurrentUser}
               key={key}
               setKey={setKey}
@@ -35,19 +35,9 @@ function App() {
               setClickedParkInList={setClickedParkInList}
             />
           </Route>
-          <Route path="/reviews">
-            <ReviewPage 
-              currentUser={currentUser} 
-              setCurrentUser={setCurrentUser}
-              key={key}
-              setKey={setKey}
-              register={register}
-              setRegister={setRegister}
-            />
-          </Route>
           <Route exact path="/">
-            <Application 
-              currentUser={currentUser} 
+            <Application
+              currentUser={currentUser}
               setCurrentUser={setCurrentUser}
               key={key}
               setKey={setKey}

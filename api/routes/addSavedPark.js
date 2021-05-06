@@ -13,30 +13,30 @@ addSavedParksRoute.put("/", (req, res) => {
       return parkVerification(place_id, value)
     } else {
       throw new Error('error grabbing parks')
-    } 
-  })
-  .then((value) => {
-  
-    if (value === true) {
-      res.send("Sorry, you already added this saved park!")
-    } else {
-      return addSavedParkForUser(place_id, value.currentUser)
-    } 
-  })
-  .then((value) => {
-
-    if (value) {
-      return getParkName(place_id)
-    } else {
-      throw new Error('error grabbing parks')
     }
   })
-  .then((value) => {
-    res.send(value)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+    .then((value) => {
+
+      if (value === true) {
+        res.send("Sorry, you already added this saved park!")
+      } else {
+        return addSavedParkForUser(place_id, value.currentUser)
+      }
+    })
+    .then((value) => {
+
+      if (value) {
+        return getParkName(place_id)
+      } else {
+        throw new Error('error grabbing parks')
+      }
+    })
+    .then((value) => {
+      res.send(value)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 // export module

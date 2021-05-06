@@ -51,7 +51,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser)
   if (buttonStatus === 'Logout') {
     setRegister(false)
     setKey(false)
-    setCurrentUser((prev) => ({...prev, uuid: null}))
+    setCurrentUser((prev) => ({ ...prev, uuid: null }))
     window.localStorage.removeItem('Uuid')
   } else if (buttonStatus === 'Login') {
     setRegister(false)
@@ -61,7 +61,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser)
 }
 
 // component for our navbar
-function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
+function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser }) {
   const classes = useStyles()
 
   if (buttonStatus === 'Logout') {
@@ -78,26 +78,23 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
             <Button color="inherit">
               <Link to="/userSavedParks" className={classes.button}>My Saved Parks</Link>
             </Button>
-            <Button color="inherit">
-              <Link to="/reviews" className={classes.button}>All Reviews</Link>
-            </Button>
           </div>
         </Toolbar>
-          <div className={classes.actionButton}>
-            <Button
-              color="inherit"
+        <div className={classes.actionButton}>
+          <Button
+            color="inherit"
+          >
+            <Link
+              to="/"
+              className={classes.button}
+              onClick={() =>
+                buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+              }
             >
-              <Link 
-                to="/" 
-                className={classes.button}
-                onClick={() =>
-                  buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
-                }
-              >
-                {buttonStatus}
-              </Link>
-            </Button>
-          </div>
+              {buttonStatus}
+            </Link>
+          </Button>
+        </div>
       </AppBar>
     )
   } else {
@@ -117,7 +114,7 @@ function Navbar ({ buttonStatus, setRegister, setKey, setCurrentUser }) {
         </Toolbar>
       </AppBar>
     )
-  } 
+  }
 }
 
 export default Navbar
