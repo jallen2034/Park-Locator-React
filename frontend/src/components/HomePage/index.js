@@ -6,9 +6,9 @@ import axios from 'axios'
 
 const retrieveParksForMap = function (setParksForMap) {
   axios.get("http://localhost:5000/")
-  .then((response) => {
-    setParksForMap(response.data)
-  })
+    .then((response) => {
+      setParksForMap(response.data)
+    })
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
   parkList: {
     overflowY: 'scroll',
-    width:'580px',
+    width: '580px',
     float: 'left',
-    height:'95vh',
-    position:'relative',
+    height: '95vh',
+    position: 'relative',
   },
   map: {
     // marginTop: '250px',
@@ -41,9 +41,9 @@ const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList,
   return (
     <div className={classes.root}>
       <div className={classes.parkList}>
-        <ParkList 
-          parksForMap={parksForMap} 
-          currentUser={currentUser} 
+        <ParkList
+          parksForMap={parksForMap}
+          currentUser={currentUser}
           setClickedPark={setClickedPark}
           clickedPark={clickedPark}
           setMapCenter={setMapCenter}
@@ -58,6 +58,7 @@ const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList,
           clickedPark={clickedPark}
           mapCenter={mapCenter}
           setMapCenter={setMapCenter}
+          clickedParkInList={clickedParkInList}
           setClickedParkInList={setClickedParkInList}
         />
       </div>

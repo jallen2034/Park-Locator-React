@@ -74,7 +74,7 @@ const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
         <div className={classes.photos}>
           {data[0].photos.map((photo) => (
             <div>
-              <img className={classes.image} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}></img>
+              <img className={classes.image} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}></img>
             </div>
           ))}
         </div>
