@@ -3,9 +3,10 @@ const reviewsRoute = express.Router()
 const { retrieveReviews } = require('./helpers')
 
 /* reshape data into an array of objects for each park, with an aray of reviews inside
- * conditionally make a new key for each skatepark name for each new park found
+ * conditionally make a new key for each skatepark name, for each new park found
  * push each review being looped through with a matching key/park name to the reshaped array for that park */
 const reshapeParkData = function (value) {
+  console.log("value in all reviews:", value)
   const reshapedObjectOfParks = {}
 
   for (const index of value) {
