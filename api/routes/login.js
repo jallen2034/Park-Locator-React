@@ -26,7 +26,7 @@ loginRoute.put("/", (req, res) => {
     .then((value) => {
 
       if (value) {
-        return validUsernamePassword(username, password) 
+        return validUsernamePassword(username, password)
       } else {
         res.send(errors.incorrect)
         throw new Error('error');

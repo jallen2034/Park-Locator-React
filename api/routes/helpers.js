@@ -111,7 +111,7 @@ const retrieveReviews = function () {
 const retrieveIndividualReview = function (place_id) {
   console.log("key:", key)
   console.log("place_id: ", place_id)
-  const parameters = [place_id] 
+  const parameters = [place_id]
   const query = `
     SELECT name, all_skateparks.place_id, review_author, review_author_url, review_rating, review_text, height, width, html_attribute, photoref
     FROM all_skateparks
@@ -124,7 +124,7 @@ const retrieveIndividualReview = function (place_id) {
 
   return db.query(query, parameters)
     .then(res => {
-      return {resRows: res.rows, key: key}
+      return { resRows: res.rows, key: key }
     })
     .catch(error => {
       console.log("Error: ", error)
@@ -205,11 +205,11 @@ const getParkName = function (place_id) {
   `
 
   return db.query(query, parameters)
-  .then(res => {
-    return res.rows[0].name
-  }).catch(error => {
-    console.log("error", error)
-  })
+    .then(res => {
+      return res.rows[0].name
+    }).catch(error => {
+      console.log("error", error)
+    })
 }
 
 // helper function to get the current users id from their uuid
@@ -221,12 +221,12 @@ const getUserId = function (uuid) {
   `
 
   return db.query(query, parameters)
-  .then(res => {
-    return res.rows
-  })
-  .catch(error => {
-    console.log("Error: ", error)
-  })
+    .then(res => {
+      return res.rows
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
 }
 
 // helper function to add a selected park to a users favourites
@@ -237,12 +237,12 @@ const addSavedParkForUser = function (place_id, currentUser) {
     VALUES ($1, $2);
   `
   return db.query(query, parameters)
-  .then(res => {
-    return "Succesful insert!"
-  })
-  .catch(error => {
-    console.log("Error: ", error)
-  })
+    .then(res => {
+      return "Succesful insert!"
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
 }
 
 // helper function to delete a saved park from user list
@@ -254,12 +254,12 @@ const deleteSavedParkForUser = function (place_id, currentUser) {
   `
 
   return db.query(query, parameters)
-  .then(res => {
-    return "Successful delete query ran"
-  })
-  .catch(error => {
-    console.log("Error: ", error)
-  })
+    .then(res => {
+      return "Successful delete query ran"
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
 }
 
 // helper function to check if added park is already in user's saved parks list
@@ -271,24 +271,22 @@ const parkVerification = function (place_id, currentUser) {
     WHERE user_id = $1
   `
   return db.query(query, parameters)
-  .then(res => {
+    .then(res => {
 
-    console.log("Got here first: ")
-    
-    if (res.rows.length === 0) return { false: false, currentUser: currentUser }
+      if (res.rows.length === 0) return { false: false, currentUser: currentUser }
 
-    console.log("Got here: ")
+      console.log("Got here: ")
 
-    for (index of res.rows) {
-      if (index.place_id === place_id) {
-        return true
+      for (index of res.rows) {
+        if (index.place_id === place_id) {
+          return true
+        }
       }
-    }
-    return { false: false, currentUser: currentUser }
-  })
-  .catch(error => {
-    console.log("Error: ", error)
-  })
+      return { false: false, currentUser: currentUser }
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
 }
 
 // export helper functions to be used elsewhere
