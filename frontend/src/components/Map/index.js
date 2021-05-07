@@ -23,7 +23,7 @@ function ChangeView({ center, zoom }) {
  * https://github.com/PaulLeCam/react-leaflet/issues/453
  * https://stackoverflow.com/questions/40901539/arbitrary-function-on-react-leaflet-marker-click
  * https://react-leaflet.js.org/docs/api-map */
-const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMapCenter, clickedParkInList, setClickedParkInList }) => {
+const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMapCenter, clickedParkInList, setClickedParkInList, searchQuery }) => {
   //  Create the Icon
   const LeafIcon = L.Icon.extend({
     options: {}
@@ -40,21 +40,41 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
 
   // map through and render markers and also conditonally set the clicked icon to red
   if (parksForMap.length > 0) {
-    listOfMarkers = parksForMap.map(({ place_id, location_lat, location_long }) => {
+    listOfMarkers = parksForMap.map(({ name, place_id, location_lat, location_long }) => {
+      const searchTerm = searchQuery.toLowerCase()
+      const parkName = name.toLowerCase()
 
-      return (
-        <Marker
-          place_id={place_id}
-          icon={place_id === clickedPark || place_id === clickedParkInList ? redIcon : blueIcon}
-          position={[location_lat, location_long]}
-          eventHandlers={{
-            click: (event) => {
-              markerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long, setClickedParkInList)
-            },
-          }}
-        >
-        </Marker>
-      )
+      if (searchQuery && parkName.indexOf(searchTerm) != -1) {
+        return (
+          <Marker
+            place_id={place_id}
+            icon={place_id === clickedPark || place_id === clickedParkInList ? redIcon : blueIcon}
+            position={[location_lat, location_long]}
+            eventHandlers={{
+              click: (event) => {
+                markerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long, setClickedParkInList)
+              },
+            }}
+          >
+          </Marker>
+        )
+      } else if (searchQuery && parkName.indexOf(searchTerm) === -1) {
+        return (null)
+      } else {
+        return (
+          <Marker
+            place_id={place_id}
+            icon={place_id === clickedPark || place_id === clickedParkInList ? redIcon : blueIcon}
+            position={[location_lat, location_long]}
+            eventHandlers={{
+              click: (event) => {
+                markerClick(event, place_id, setClickedPark, setMapCenter, mapCenter, location_lat, location_long, setClickedParkInList)
+              },
+            }}
+          >
+          </Marker>
+        )
+      }
     })
   }
 
