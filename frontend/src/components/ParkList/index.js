@@ -1,20 +1,6 @@
 import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import ParkListItem from '../ParkListItem'
-import TextField from '@material-ui/core/TextField';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '90%',
-      marginLeft: '25px',
-      marginRight: '25px',
-      marginBottom: '20px',
-      marginTop: '18px'
-    },
-  },
-}));
 
 // update state of the clicked park in our list of parks, also updates our map center state too
 const listItemClick = function (event, place_id, setClickedPark, setMapCenter, location_lat, location_long, setClickedParkInList) {
@@ -27,7 +13,6 @@ const listItemClick = function (event, place_id, setClickedPark, setMapCenter, l
  * https://reactjs.org/docs/hooks-reference.html#useref
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf */
 const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark, setMapCenter, clickedParkInList, setClickedParkInList, searchQuery, setSearchQuery, setMarkersToHide, markersToHide }) => {
-  const classes = useStyles()
   let listOfParks
 
   if (parksForMap.length > 0) {
@@ -84,16 +69,6 @@ const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark, setMa
 
   return (
     <div>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField
-          id="standard-basic"
-          label="Search Skateparks"
-          value={searchQuery}
-          onChange={(event) => {
-            setSearchQuery(event.target.value)
-          }}
-        />
-      </form>
       {listOfParks}
     </div>
   )

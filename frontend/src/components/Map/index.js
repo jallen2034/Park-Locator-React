@@ -41,7 +41,6 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
   // map through and render markers and also conditonally set the clicked icon to red
   if (parksForMap.length > 0) {
     listOfMarkers = parksForMap.map(({ name, place_id, location_lat, location_long }) => {
-      console.log("name: ", name)
       const searchTerm = searchQuery.toLowerCase()
       const parkName = name.toLowerCase()
 
