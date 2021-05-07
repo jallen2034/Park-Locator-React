@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Navbar'
 import HomePage from '../HomePage'
 import SignUp from '../SignUp'
@@ -24,9 +24,9 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <Login 
-          setRegister={setRegister} 
-          setKey={setKey} 
+        <Login
+          setRegister={setRegister}
+          setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
       </div>
@@ -40,9 +40,9 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <SignUp 
-          setRegister={setRegister} 
-          setKey={setKey} 
+        <SignUp
+          setRegister={setRegister}
+          setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
       </div>
@@ -50,14 +50,14 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
   } else {
     return (
       <div className={classes.root}>
-        <Navbar 
+        <Navbar
           buttonStatus='Logout'
           setRegister={setRegister}
           setKey={setKey}
           setCurrentUser={setCurrentUser}
         />
-        <div style={{marginTop: "64px"}}>
-          <HomePage 
+        <div style={{ marginTop: "64px" }}>
+          <HomePage
             currentUser={currentUser}
             clickedPark={clickedPark}
             setClickedPark={setClickedPark}
