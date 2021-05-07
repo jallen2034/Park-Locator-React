@@ -2,6 +2,20 @@ import { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import * as L from "leaflet";
 import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh',
+    width: '70vw',
+    marginLeft: '0px',
+    overflow: 'hidden',
+    [theme.breakpoints.down('sm')]: {
+      height: '38vh',
+      width: '100vw',
+    },
+  },
+}))
 
 /* helper to set the users selected park/marker 
  * also changes our state for our map center to center to the new marker that was clicked on */
@@ -24,6 +38,7 @@ function ChangeView({ center, zoom }) {
  * https://stackoverflow.com/questions/40901539/arbitrary-function-on-react-leaflet-marker-click
  * https://react-leaflet.js.org/docs/api-map */
 const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMapCenter, clickedParkInList, setClickedParkInList, searchQuery }) => {
+  const classes = useStyles()
   //  Create the Icon
   const LeafIcon = L.Icon.extend({
     options: {}
@@ -83,7 +98,7 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
       center={mapCenter}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: '100vh', width: '70vw', marginLeft: '0px', overflow: 'hidden' }}
+      className={classes.root}
     >
       <ChangeView center={mapCenter} zoom={13} />
       <TileLayer

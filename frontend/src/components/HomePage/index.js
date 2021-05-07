@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     height: '100%',
     overflow: 'hidden',
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap-reverse',
+    },
   },
   parkList: {
     overflowY: 'scroll',
@@ -25,9 +28,12 @@ const useStyles = makeStyles((theme) => ({
     float: 'left',
     height: '85vh',
     position: 'relative',
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw'
+    }
   },
   map: {
-    // marginTop: '250px',
+    // marginTop: '250px'
   },
   searchBar: {
     '& > *': {
@@ -39,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '18px'
     },
   },
+  mapSearch: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw'
+    }
+  }
 }))
 
 const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList, setClickedParkInList, mapCenter, setMapCenter }) => {
@@ -52,7 +63,7 @@ const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList,
 
   return (
     <div className={classes.root}>
-      <div>
+      <div className={classes.mapSearch}>
         <form className={classes.searchBar} noValidate autoComplete="off">
           <TextField
             id="standard-basic"
