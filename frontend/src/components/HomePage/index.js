@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList, setClickedParkInList, mapCenter, setMapCenter }) => {
   const classes = useStyles()
   const [parksForMap, setParksForMap] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     retrieveParksForMap(setParksForMap)
@@ -49,6 +50,8 @@ const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList,
           setMapCenter={setMapCenter}
           clickedParkInList={clickedParkInList}
           setClickedParkInList={setClickedParkInList}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
         />
       </div>
       <div className={classes.map}>
@@ -60,6 +63,7 @@ const HomePage = ({ currentUser, clickedPark, setClickedPark, clickedParkInList,
           setMapCenter={setMapCenter}
           clickedParkInList={clickedParkInList}
           setClickedParkInList={setClickedParkInList}
+          searchQuery={searchQuery}
         />
       </div>
     </div>
