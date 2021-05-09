@@ -306,7 +306,6 @@ const passwordVerifier = function (password) {
     .has().digits(2)
     .has().not().spaces()
     .is().not().oneOf(blacklistedValues);
-
   const errorCodes = schema.validate(password, { list: true })
 
   for (error of errorCodes) {
