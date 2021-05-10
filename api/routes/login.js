@@ -33,8 +33,8 @@ loginRoute.put("/", (req, res) => {
       }
     })
     .then((value) => {
-      console.log("value from validUsernamePassword helper: ", value)
-      if (value) {
+
+      if (value.true) {
         res.send(value)
       } else {
         res.send(errors.incorrect)

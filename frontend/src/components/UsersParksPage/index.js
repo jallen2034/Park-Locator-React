@@ -26,7 +26,7 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
 
   useEffect(() => {
     retrieveUsersSavedParks(currentUser, setUsersSavedParks)
-  }, [ , currentUser]);
+  }, [, currentUser]);
 
   return (
     <>
@@ -37,17 +37,20 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
         setKey={setKey}
         register={register}
         setRegister={setRegister}
+        setClickedPark={setClickedPark}
+        setMapCenter={setMapCenter}
+        setClickedParkInList={setClickedParkInList}
       />
-        <div className={classes.root}>
-          <UserSavedParks
-            usersSavedParks={usersSavedParks}
-            currentUser={currentUser}
-            setUsersSavedParks={setUsersSavedParks}
-            setClickedPark={setClickedPark}
-            setMapCenter={setMapCenter}
-            setClickedParkInList={setClickedParkInList}
-          />
-        </div>
+      <div className={classes.root}>
+        <UserSavedParks
+          usersSavedParks={usersSavedParks}
+          currentUser={currentUser}
+          setUsersSavedParks={setUsersSavedParks}
+          setClickedPark={setClickedPark}
+          setMapCenter={setMapCenter}
+          setClickedParkInList={setClickedParkInList}
+        />
+      </div>
     </>
   )
 }

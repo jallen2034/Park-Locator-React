@@ -46,12 +46,16 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 // helper function to act as the button switcher
-const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser) {
+const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark) {
 
+  // TODO - fix later by not directly mutating state
   if (buttonStatus === 'Logout') {
     setRegister(false)
     setKey(false)
     setCurrentUser((prev) => ({ ...prev, uuid: null }))
+    setClickedParkInList('')
+    setClickedPark('')
+    setMapCenter([49.282, -123.120])
     window.localStorage.removeItem('Uuid')
   } else if (buttonStatus === 'Login') {
     setRegister(false)
@@ -61,7 +65,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser)
 }
 
 // component for our navbar
-function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser }) {
+function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark }) {
   const classes = useStyles()
 
   if (buttonStatus === 'Logout') {
@@ -88,7 +92,7 @@ function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser }) {
               to="/"
               className={classes.button}
               onClick={() =>
-                buttonClick(buttonStatus, setRegister, setKey, setCurrentUser)
+                buttonClick(buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark)
               }
             >
               {buttonStatus}
