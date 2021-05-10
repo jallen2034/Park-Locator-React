@@ -30,6 +30,8 @@ const useStyles = makeStyles({
   },
   h4: {
     fontSize: '24px',
+    margin: '35px',
+    textAlign: 'center'
   }
 });
 
@@ -50,9 +52,9 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
                 phone={phone}
                 website={website}
               />
-              <UserSavedParksButton 
-                currentUser={currentUser} 
-                place_id={place_id} 
+              <UserSavedParksButton
+                currentUser={currentUser}
+                place_id={place_id}
                 setUsersSavedParks={setUsersSavedParks}
                 setClickedPark={setClickedPark}
                 setMapCenter={setMapCenter}
@@ -70,7 +72,7 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
       <>
         <div className={classes.flexTitle}>
           <Typography variant='h4' className={classes.h4}>
-              My Saved Parks
+            My Saved Parks
           </Typography>
         </div>
         <div>
@@ -80,7 +82,7 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
     )
   } else {
     return (
-      <div className={classes.flexTitle}>
+      <div>
         <Typography variant='h4' className={classes.h4}>
           You haven't favourited any Skateparks! Add some saved parks in here!
         </Typography>
