@@ -1,6 +1,14 @@
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 import { Link } from "react-router-dom";
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuIcon from '@material-ui/icons/Menu';
 
 // style component
 const useStyles = makeStyles((theme) => ({
@@ -11,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     backgroundColor: '#384da1'
   },
+  menuIcon: {
+    color: 'white'
+  },
   login: {
     backgroundColor: '#384da1'
   },
@@ -19,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginLeft: '15px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   },
   actionButton: {
     display: 'flex',
@@ -26,9 +40,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: '22px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   },
-  toolbar: {
-    // backgroundColor: 'orange'
+  actionButtons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: '22px',
+  },
+  hamBurger: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'block'
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -40,8 +69,20 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: 'white'
   },
+  buttonDrawer: {
+    textDecoration: 'none',
+    color: 'black'
+  },
+  buttonDrawerLogout: {
+    color: '#a60c56',
+    textDecoration: 'none',
+    fontWeight: 'bold'
+  },
   testButton: {
     backgroundColor: 'orange'
+  },
+  list: {
+    width: 200,
   }
 }))
 
@@ -67,6 +108,59 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser,
 // component for our navbar
 function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark }) {
   const classes = useStyles()
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  // helper function to toggle the drawer of options as being open
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  }
+
+  // create the list of buttons in our hamburger menu
+  const list = (anchor) => (
+    <div
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+      className={classes.list}
+    >
+      <List>
+        <ListItem>
+          <Button color="inherit">
+            <Link to="/" className={classes.buttonDrawer}>Homepage</Link>
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button color="inherit">
+            <Link to="/userSavedParks" className={classes.buttonDrawer}>My Saved Parks</Link>
+          </Button>
+        </ListItem>
+        <ListItem>
+          <div>
+            <Button
+              color="inherit"
+            >
+              <Link
+                to="/"
+                className={classes.buttonDrawerLogout}
+                onClick={() =>
+                  buttonClick(buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark)
+                }
+              >
+                {buttonStatus}
+              </Link>
+            </Button>
+          </div>
+        </ListItem>
+      </List>
+    </div>
+  );
+
 
   if (buttonStatus === 'Logout') {
     return (
@@ -84,20 +178,32 @@ function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser, setMapCente
             </Button>
           </div>
         </Toolbar>
-        <div className={classes.actionButton}>
-          <Button
-            color="inherit"
-          >
-            <Link
-              to="/"
-              className={classes.button}
-              onClick={() =>
-                buttonClick(buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark)
-              }
+        <div className={classes.actionButtons}>
+          <div className={classes.hamBurger}>
+            <>
+              <Button onClick={toggleDrawer('right', true)}>
+                <MenuIcon className={classes.menuIcon} />
+              </Button>
+              <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+                {list('right')}
+              </Drawer>
+            </>
+          </div>
+          <div className={classes.actionButton}>
+            <Button
+              color="inherit"
             >
-              {buttonStatus}
-            </Link>
-          </Button>
+              <Link
+                to="/"
+                className={classes.button}
+                onClick={() =>
+                  buttonClick(buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark)
+                }
+              >
+                {buttonStatus}
+              </Link>
+            </Button>
+          </div>
         </div>
       </AppBar>
     )
