@@ -282,7 +282,8 @@ const parkVerification = function (place_id, currentUser) {
     })
 }
 
-// helper function to verify a users password is secure on register
+/* helper function to verify a users password is secure on register
+ * https://www.npmjs.com/package/password-validator */
 const passwordVerifier = function (password) {
   const blacklistedValues = [
     'Passw0rd',
@@ -311,25 +312,25 @@ const passwordVerifier = function (password) {
   for (error of errorCodes) {
     switch (error) {
       case 'min':
-        finalError += 'Be a minimum of 8 characters '
+        finalError += 'Be a minimum of 8 characters, '
         break;
       case 'max':
-        finalError += 'Be no longer than of 100 characters '
+        finalError += 'Be no longer than of 100 characters, '
         break;
       case 'uppercase':
-        finalError += 'Have uppercase letters '
+        finalError += 'Have uppercase letters, '
         break;
       case 'lowercase':
-        finalError += 'Have lowercase letters '
+        finalError += 'Have lowercase letters, '
         break;
       case 'digits':
-        finalError += 'Have at least 2 digits '
+        finalError += 'Have at least 2 digits, '
         break;
       case 'spaces':
-        finalError += 'Should not have spaces '
+        finalError += 'Should not have spaces, '
         break;
       case 'oneOf':
-        finalError += 'Should be something less generic and secure '
+        finalError += 'Should be something less generic and secure, '
         break;
     }
   }
