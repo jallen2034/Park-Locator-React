@@ -55,6 +55,9 @@ const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRe
           setRegister={setRegister}
           setKey={setKey}
           setCurrentUser={setCurrentUser}
+          setMapCenter={setMapCenter}
+          setClickedParkInList={setClickedParkInList}
+          setClickedPark={setClickedPark}
         />
         <div style={{ marginTop: "64px" }}>
           <HomePage

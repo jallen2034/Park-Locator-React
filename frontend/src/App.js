@@ -17,6 +17,8 @@ function App() {
     uuid: sessionUuid || null
   })
 
+  console.log("currentUser: ", currentUser)
+
   return (
     <>
       <Router>
