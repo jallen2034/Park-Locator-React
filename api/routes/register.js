@@ -12,10 +12,10 @@ registerRoute.put("/", (req, res) => {
     confirmation: "Must provide confirmation password!",
     passwordsNoMatch: "Password and password confirmation do not match!",
     usernameTaken: "Username is taken",
-    passwordNotValid: "Sorry your password must: "
+    passwordNotValid: "Your password must: "
   }
 
-  // TODO - refactor into switch statement
+  // https://stackoverflow.com/questions/17720264/remove-last-comma-from-a-string
   if (!username) {
     res.send(errors.username)
     return
@@ -42,7 +42,8 @@ registerRoute.put("/", (req, res) => {
     .then((value) => {
       if (!value.status) {
         errors.passwordNotValid += value.error
-        res.send(errors.passwordNotValid)
+        const finalError = errors.passwordNotValid.replace(/,\s*$/, ".")
+        res.send(finalError)
       } else {
         return addUserToDb(username, password)
       }
