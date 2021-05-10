@@ -1,6 +1,6 @@
 const express = require("express")
 const registerRoute = express.Router()
-const { userNameExists, addUserToDb } = require('./helpers')
+const { userNameExists, addUserToDb, passwordVerifier } = require('./helpers')
 
 // POST route to handle the user registering for a user - TODO
 registerRoute.put("/", (req, res) => {
@@ -11,7 +11,8 @@ registerRoute.put("/", (req, res) => {
     password: "Must provide password!",
     confirmation: "Must provide confirmation password!",
     passwordsNoMatch: "Password and password confirmation do not match!",
-    usernameTaken: "Username is taken"
+    usernameTaken: "Username is taken",
+    passwordNotValid: "Sorry your password must: "
   }
 
   // TODO - refactor into switch statement
@@ -32,9 +33,16 @@ registerRoute.put("/", (req, res) => {
   let validUsername = userNameExists(username)
   validUsername
     .then((value) => {
-
       if (value) {
         res.send(errors.usernameTaken)
+      } else {
+        return passwordVerifier(password)
+      }
+    })
+    .then((value) => {
+      if (!value.status) {
+        errors.passwordNotValid += value.error
+        res.send(errors.passwordNotValid)
       } else {
         return addUserToDb(username, password)
       }

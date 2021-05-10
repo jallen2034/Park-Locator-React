@@ -1,7 +1,7 @@
-// db uses plaintext passwords - BAD! TODO - fix using bcrypt before publishing to production
-const { db } = require('../db/db');
-const bcrypt = require('bcrypt');
+const { db } = require('../db/db')
+const bcrypt = require('bcrypt')
 const key = require('./apiKey')
+var passwordValidator = require('password-validator');
 
 /* helper function to generate a 6 char random string, this is not my own implementation, all credit goes to its creator:
    https://stackoverflow.com/questions/16106701/how-to-generate-a-random-string-of-letters-and-numbers-in-javascript */
@@ -28,8 +28,6 @@ const userNameExists = function (username) {
 
   return db.query(query, parameters)
     .then(res => {
-      console.log("Sucessful query")
-
       if (res.rows.length === 0) {
         return false
       } else {
@@ -270,10 +268,7 @@ const parkVerification = function (place_id, currentUser) {
   `
   return db.query(query, parameters)
     .then(res => {
-
       if (res.rows.length === 0) return { false: false, currentUser: currentUser }
-
-      console.log("Got here: ")
 
       for (index of res.rows) {
         if (index.place_id === place_id) {
@@ -285,6 +280,65 @@ const parkVerification = function (place_id, currentUser) {
     .catch(error => {
       console.log("Error: ", error)
     })
+}
+
+// helper function to verify a users password is secure on register
+const passwordVerifier = function (password) {
+  const blacklistedValues = [
+    'Passw0rd',
+    'Password123',
+    'password',
+    'Password',
+    '123456',
+    '1234567',
+    '12345678',
+    '123456789',
+    '12345678910',
+    'qwerty'
+  ]
+  let finalError = ""
+  let schema = new passwordValidator()
+  schema
+    .is().min(8)
+    .is().max(100)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits(2)
+    .has().not().spaces()
+    .is().not().oneOf(blacklistedValues);
+  const errorCodes = schema.validate(password, { list: true })
+
+  for (error of errorCodes) {
+    switch (error) {
+      case 'min':
+        finalError += 'Be a minimum of 8 characters '
+        break;
+      case 'max':
+        finalError += 'Be no longer than of 100 characters '
+        break;
+      case 'uppercase':
+        finalError += 'Have uppercase letters '
+        break;
+      case 'lowercase':
+        finalError += 'Have lowercase letters '
+        break;
+      case 'digits':
+        finalError += 'Have at least 2 digits '
+        break;
+      case 'spaces':
+        finalError += 'Should not have spaces '
+        break;
+      case 'oneOf':
+        finalError += 'Should be something less generic and secure '
+        break;
+    }
+  }
+
+  if (errorCodes.length > 0) {
+    return { status: false, error: finalError }
+  } else {
+    return { status: true }
+  }
 }
 
 // export helper functions to be used elsewhere
@@ -301,5 +355,6 @@ module.exports = {
   addSavedParkForUser,
   getParkName,
   deleteSavedParkForUser,
-  parkVerification
+  parkVerification,
+  passwordVerifier
 }

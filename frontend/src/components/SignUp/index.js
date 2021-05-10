@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'url(https://images.unsplash.com/photo-1536318431364-5cc762cfc8ec?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-    theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -50,29 +50,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignUp({setRegister, setKey, setCurrentUser}) {
+function SignUp({ setRegister, setKey, setCurrentUser }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const classes = useStyles();
-  
+
   // helper callback routes to the registerRoute express endpoint to register + log the user in automatically
   const registerUser = function (event, setCurrentUser) {
     event.preventDefault()
 
     axios.put("http://localhost:5000/register", { username, password, passwordConfirm })
-    .then((response) => {
+      .then((response) => {
 
-      if (response.data.true === true) {
-        setKey(true)
-        window.localStorage.setItem('Uuid', response.data.uuid)
-        setCurrentUser({uuid: response.data.uuid})
-      } else {
-        toast.error(response.data)
-      }
-    })
+        if (response.data.true === true) {
+          setKey(true)
+          window.localStorage.setItem('Uuid', response.data.uuid)
+          setCurrentUser({ uuid: response.data.uuid })
+        } else {
+          toast.error(response.data)
+        }
+      })
   }
-  
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -137,8 +137,8 @@ function SignUp({setRegister, setKey, setCurrentUser}) {
             </Button>
             <Grid container>
               <Grid item>
-                <Link 
-                  href="#" 
+                <Link
+                  href="#"
                   variant="body2"
                   onClick={(event) => renderRegister(event, setRegister)}
                 >
