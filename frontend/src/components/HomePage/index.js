@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       width: '90%',
       marginLeft: '25px',
       marginRight: '25px',
-      marginBottom: '20px',
+      marginBottom: '22px',
       marginTop: '18px'
     },
   },

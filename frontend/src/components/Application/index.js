@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Navbar from '../Navbar'
 import HomePage from '../HomePage'
 import SignUp from '../SignUp'
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Application = ({ currentUser, setCurrentUser, key, setKey, register, setRegister, clickedPark, setClickedPark, clickedParkInList, setClickedParkInList, mapCenter, setMapCenter }) => {
+const Application = ({ currentUser, setCurrentUser, setKey, register, setRegister, clickedPark, setClickedPark, clickedParkInList, setClickedParkInList, mapCenter, setMapCenter }) => {
   const classes = useStyles()
 
   if (!register && !currentUser.uuid) {

@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import ParkListItem from '../ParkListItem'
 
 // update state of the clicked park in our list of parks, also updates our map center state too
@@ -23,9 +21,10 @@ const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark, setMa
       const parkName = name.toLowerCase()
       if (clickedPark === place_id) selected = true
       if (clickedParkInList === place_id) selectedStyle = true
-      if (searchQuery && parkName.indexOf(searchTerm) != -1) {
+      if (searchQuery && parkName.indexOf(searchTerm) !== -1) {
         return (
           <ParkListItem
+            key={place_id}
             place_id={place_id}
             name={name}
             formattedAddress={formatted_address}
@@ -47,6 +46,7 @@ const ParkList = ({ parksForMap, currentUser, setClickedPark, clickedPark, setMa
       } else {
         return (
           <ParkListItem
+            key={place_id}
             place_id={place_id}
             name={name}
             formattedAddress={formatted_address}

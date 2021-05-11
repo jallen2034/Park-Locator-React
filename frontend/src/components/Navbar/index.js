@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 import { Link } from "react-router-dom";
@@ -105,7 +105,7 @@ const buttonClick = function (buttonStatus, setRegister, setKey, setCurrentUser,
 // component for our navbar
 function Navbar({ buttonStatus, setRegister, setKey, setCurrentUser, setMapCenter, setClickedParkInList, setClickedPark }) {
   const classes = useStyles()
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     right: false,
   });
 
