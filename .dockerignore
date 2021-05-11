@@ -1,0 +1,9 @@
+node_modules/
+.env
+.nyc_output
+coverage
+build/
+apiKey.js
+/home/jacob/personal-projects/park-locator-2.0/Park-Locator-2.0/api/routes/apiKey.js
+/**/build
+.git
