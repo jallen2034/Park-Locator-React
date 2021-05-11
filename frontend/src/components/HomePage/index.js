@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 
 const retrieveParksForMap = function (setParksForMap) {
-  axios.get("http://localhost:5000/")
+  axios.get("/api/")
     .then((response) => {
       setParksForMap(response.data)
     })

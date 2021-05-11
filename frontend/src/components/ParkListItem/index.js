@@ -122,7 +122,7 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
 
   // helper to fetch individal review from park - note this mutates state - TODO fix
   const handleClickOpen = function (place_id) {
-    axios.put("http://localhost:5000/individualReviews", { place_id })
+    axios.put("/api/individualReviews", { place_id })
       .then((response) => {
         const apiData = response.data.resRows
         const apiKey = response.data.key

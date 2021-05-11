@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const addToSavedParks = function (place_id, currentUser) {
   const error = "Sorry, you already added this saved park!"
-  axios.put("http://localhost:5000/addSavedPark", { place_id, currentUser })
+  axios.put("/api/addSavedPark", { place_id, currentUser })
     .then((response) => {
 
       if (response.data === error) {

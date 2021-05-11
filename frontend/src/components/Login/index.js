@@ -61,7 +61,7 @@ function SignIn({ setRegister, setKey, setCurrentUser }) {
   const loginUser = function (event, setCurrentUser) {
     event.preventDefault()
 
-    axios.put("http://localhost:5000/login", { username, password })
+    axios.put("/api/login", { username, password })
       .then((response) => {
 
         if (response.data.true === true) {

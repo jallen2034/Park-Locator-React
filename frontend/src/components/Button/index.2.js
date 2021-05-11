@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 const deleteSavedPark = function (place_id, currentUser, setUsersSavedParks) {
-  axios.put("http://localhost:5000/deleteSavedPark", { place_id, currentUser })
+  axios.put("/api/deleteSavedPark", { place_id, currentUser })
     .then((response) => {
       toast.success(`${response.data} deleted from your saved parks!`)
       setUsersSavedParks((currentState) => {
@@ -27,7 +27,7 @@ const deleteSavedPark = function (place_id, currentUser, setUsersSavedParks) {
 
 // helper to navigate the user to the park they have saved on their map
 const goToOnMap = function (place_id, setClickedPark, setMapCenter, setClickedParkInList) {
-  axios.put("http://localhost:5000/individualParkLocation", { place_id })
+  axios.put("/api/individualParkLocation", { place_id })
     .then((response) => {
       const location_lat = response.data[0].location_lat
       const location_long = response.data[0].location_long

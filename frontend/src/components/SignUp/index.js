@@ -60,7 +60,7 @@ function SignUp({ setRegister, setKey, setCurrentUser }) {
   const registerUser = function (event, setCurrentUser) {
     event.preventDefault()
 
-    axios.put("http://localhost:5000/register", { username, password, passwordConfirm })
+    axios.put("/api/register", { username, password, passwordConfirm })
       .then((response) => {
 
         if (response.data.true === true) {

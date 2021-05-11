@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 const retrieveUsersSavedParks = function (currentUser, setUsersSavedParks) {
   if (currentUser === null) return
   const uuid = currentUser.uuid
-  axios.put("http://localhost:5000/userSavedParks", { uuid })
+  axios.put("/api/userSavedParks", { uuid })
     .then((response) => {
       setUsersSavedParks(response.data)
     })
