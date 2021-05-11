@@ -33,6 +33,10 @@ Homepage with Add park error:
 
 !["Error"](/Docs/Screenshots/4.png)
 
+Reviews for a skatepark:
+
+!["Reviews"](/Docs/Screenshots/2.png)
+
 Users Saved Parks page:
 
 !["Error"](/Docs/Screenshots/5.png)
