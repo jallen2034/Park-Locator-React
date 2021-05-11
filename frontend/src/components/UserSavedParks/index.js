@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     fontSize: '24px',
     marginRight: '35px',
     marginTop: '35px',
-    marginBottom: '35px',
+    marginBottom: '15px',
     textAlign: 'center'
   }
 });
