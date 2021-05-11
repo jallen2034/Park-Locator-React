@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ParkData = ({name, formattedAddress, phone, website}) => {
+const ParkData = ({ name, formattedAddress, phone, website }) => {
   const classes = useStyles()
   return (
     <div>

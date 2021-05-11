@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import * as L from "leaflet";
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
@@ -59,7 +58,7 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
       const searchTerm = searchQuery.toLowerCase()
       const parkName = name.toLowerCase()
 
-      if (searchQuery && parkName.indexOf(searchTerm) != -1) {
+      if (searchQuery && parkName.indexOf(searchTerm) !== -1) {
         return (
           <Marker
             place_id={place_id}
@@ -78,6 +77,7 @@ const MapDisplay = ({ parksForMap, setClickedPark, clickedPark, mapCenter, setMa
       } else {
         return (
           <Marker
+            key={place_id}
             place_id={place_id}
             icon={place_id === clickedPark || place_id === clickedParkInList ? redIcon : blueIcon}
             position={[location_lat, location_long]}

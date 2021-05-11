@@ -8,6 +8,7 @@ import Dialog from '@material-ui/core/Dialog';
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
+import ReactStars from "react-rating-stars-component";
 
 const useStyles = makeStyles({
   root: {
@@ -56,9 +57,10 @@ const useStyles = makeStyles({
   }
 });
 
-/* SimpleDialog component - can display photos for each park review using the google places API for photos. Needs a dynamic photoref and api key from backend
+/* SimpleDialog component - display photos for each park review using the google places API for photos. Needs a dynamic photoref and api key from backend
  * https://material-ui.com/customization/components
- * https://developers.google.com/maps/documentation/places/web-service/photos */
+ * https://developers.google.com/maps/documentation/places/web-service/photos
+ * https://www.npmjs.com/package/react-rating-stars-component */
 const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
   const classes = useStyles()
   const closeDialog = () => {
@@ -74,20 +76,30 @@ const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
         <div className={classes.photos}>
           {data[0].photos.map((photo) => (
             <div>
-              <img className={classes.image} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}></img>
+              <img
+                className={classes.image}
+                alt="Couldn't fetch pic from Places API :("
+                src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}
+              ></img>
             </div>
           ))}
         </div>
         {data.map((review) => (
-          <div>
+          <div key={`${review.place_id}${review.review_author}`}>
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <Typography variant='h5' className={classes.h5}>
                   {review.review_author}
                 </Typography>
                 <Typography variant='h6' className={classes.h6}>
-                  {review.review_rating} Stars
-                  </Typography>
+                  <ReactStars
+                    count={5}
+                    value={review.review_rating}
+                    edit={false}
+                    size={24}
+                    activeColor="#ffd700"
+                  />
+                </Typography>
                 <Typography variant='h6' className={classes.h6}>
                   {review.review_text}
                 </Typography>

@@ -28,13 +28,13 @@ const deleteSavedPark = function (place_id, currentUser, setUsersSavedParks) {
 // helper to navigate the user to the park they have saved on their map
 const goToOnMap = function (place_id, setClickedPark, setMapCenter, setClickedParkInList) {
   axios.put("http://localhost:5000/individualParkLocation", { place_id })
-  .then((response) => {
-    const location_lat = response.data[0].location_lat
-    const location_long = response.data[0].location_long
-    setClickedPark(place_id)
-    setMapCenter([location_lat, location_long])
-    setClickedParkInList('')
-  })
+    .then((response) => {
+      const location_lat = response.data[0].location_lat
+      const location_long = response.data[0].location_long
+      setClickedPark(place_id)
+      setMapCenter([location_lat, location_long])
+      setClickedParkInList('')
+    })
 }
 
 const UserSavedParksButton = ({ currentUser, place_id, setUsersSavedParks, setClickedPark, setMapCenter, setClickedParkInList }) => {
@@ -49,15 +49,15 @@ const UserSavedParksButton = ({ currentUser, place_id, setUsersSavedParks, setCl
         disableElevation
         onClick={(e) => deleteSavedPark(place_id, currentUser, setUsersSavedParks)}
       >
-        Remove From Saved Parks
+        Remove
       </Button>
-      <Button 
-        variant="contained" 
-        color="primary" 
+      <Button
+        variant="contained"
+        color="primary"
         disableElevation
         className={classes.root}
         onClick={(e) => goToOnMap(place_id, setClickedPark, setMapCenter, setClickedParkInList)}
-        >
+      >
         <Link to="/" style={{ textDecoration: "none", color: "white" }}>Go to on Map</Link>
       </Button>
     </div>

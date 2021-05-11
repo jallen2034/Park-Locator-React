@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // helper that can render the register component conditonally when the "need an account?" link is clicked
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // login component
-function SignIn ({setRegister, setKey, setCurrentUser}) {
+function SignIn({ setRegister, setKey, setCurrentUser }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const classes = useStyles();
@@ -61,13 +61,13 @@ function SignIn ({setRegister, setKey, setCurrentUser}) {
   const loginUser = function (event, setCurrentUser) {
     event.preventDefault()
 
-    axios.put("http://localhost:5000/login", { username, password } )
+    axios.put("http://localhost:5000/login", { username, password })
       .then((response) => {
 
         if (response.data.true === true) {
           setKey(true)
           window.localStorage.setItem('Uuid', response.data.uuid)
-          setCurrentUser({uuid: response.data.uuid})
+          setCurrentUser({ uuid: response.data.uuid })
         } else {
           toast.error(response.data)
         }
@@ -133,9 +133,9 @@ function SignIn ({setRegister, setKey, setCurrentUser}) {
                 </Link>
               </Grid> */}
               <Grid item>
-                <Link 
+                <Link
                   onClick={(event) => renderRegister(event, setRegister)}
-                  href="#" 
+                  href="#"
                   variant="body2"
                 >
                   {"Don't have an account? Sign Up"}

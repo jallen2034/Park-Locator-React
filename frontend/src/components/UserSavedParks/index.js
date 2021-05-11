@@ -30,7 +30,9 @@ const useStyles = makeStyles({
   },
   h4: {
     fontSize: '24px',
-    margin: '35px',
+    marginRight: '35px',
+    marginTop: '35px',
+    marginBottom: '35px',
     textAlign: 'center'
   }
 });
@@ -42,7 +44,6 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
   if (usersSavedParks.length > 0) {
     savedParks = usersSavedParks.map(({ place_id, name, formattedAddress, phone, website }) => {
       return (
-        // to here >:((
         <div id="test" className={classes.flex}>
           <Card className={classes.root} variant="outlined">
             <CardContent>
@@ -67,6 +68,7 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
     })
   }
 
+  // TODO - fix this so it renders correctly with a loading spinner
   if (savedParks) {
     return (
       <>
@@ -84,7 +86,7 @@ const UserSavedParks = ({ usersSavedParks, currentUser, setUsersSavedParks, setC
     return (
       <div>
         <Typography variant='h4' className={classes.h4}>
-          You haven't favourited any Skateparks! Add some saved parks in here!
+          No Skateparks favourited! Add some parks in here!
         </Typography>
       </div>
     )

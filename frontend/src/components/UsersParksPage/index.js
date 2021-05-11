@@ -26,7 +26,7 @@ const UsersParksPage = ({ currentUser, setCurrentUser, key, setKey, register, se
 
   useEffect(() => {
     retrieveUsersSavedParks(currentUser, setUsersSavedParks)
-  }, [, currentUser]);
+  }, [currentUser]);
 
   return (
     <>

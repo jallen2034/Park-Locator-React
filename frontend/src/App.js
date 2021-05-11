@@ -1,6 +1,6 @@
 import Application from '../src/components/Application'
 import React, { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UsersParksPage from '../src/components/UsersParksPage'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,8 +16,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     uuid: sessionUuid || null
   })
-
-  console.log("currentUser: ", currentUser)
 
   return (
     <>
@@ -40,7 +38,6 @@ function App() {
             <Application
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
-              key={key}
               setKey={setKey}
               register={register}
               setRegister={setRegister}
