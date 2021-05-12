@@ -22,6 +22,7 @@ const indexRoute = require('./routes/index')
 const savedParksRoute = require('./routes/savedParks')
 const addSavedParkRoute = require('./routes/addSavedPark')
 const deleteSavedParkRoute = require('./routes/deleteSavedPark')
+const photosRoute = require('./routes/photos')
 
 // GET & POST requests here, mount all resource routes
 app.use('/api/register', registerRoute)
@@ -33,6 +34,7 @@ app.use('/api/', indexRoute)
 app.use('/api/userSavedParks', savedParksRoute)
 app.use('/api/addSavedPark', addSavedParkRoute)
 app.use('/api/deleteSavedPark', deleteSavedParkRoute)
+app.use('/api/photos', photosRoute)
 
 // app listener
 app.listen(5000, () => {
