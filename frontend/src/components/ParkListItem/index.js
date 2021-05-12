@@ -61,12 +61,13 @@ const useStyles = makeStyles({
  * https://material-ui.com/customization/components
  * https://developers.google.com/maps/documentation/places/web-service/photos
  * https://www.npmjs.com/package/react-rating-stars-component */
-const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
+const SimpleDialog = function ({ open, handleClose, data, name }) {
   const classes = useStyles()
   const closeDialog = () => {
     handleClose()
   }
 
+  // hit our /api/photos endpoint on each iteration of our data being mapped through to render a photo
   return (
     <Dialog onClose={closeDialog} open={open}>
       <Typography variant='h4' className={classes.h4}>
@@ -79,7 +80,7 @@ const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
               <img
                 className={classes.image}
                 alt="Couldn't fetch pic from Places API :("
-                src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}
+                src={`/api/photos/${photo.photoref}`}
               ></img>
             </div>
           ))}
@@ -117,7 +118,6 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [data, setData] = useState(null)
-  const [mapsApiKey, setMapsApiKey] = useState('')
   const parkDiv = useRef(null)
 
   // helper to fetch individal review from park - note this mutates state - TODO fix
@@ -125,8 +125,6 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
     axios.put("/api/individualReviews", { place_id })
       .then((response) => {
         const apiData = response.data.resRows
-        const apiKey = response.data.key
-        setMapsApiKey(apiKey)
         setData(apiData)
         setOpen(true)
       })
@@ -174,7 +172,6 @@ const ParkListItem = ({ place_id, name, formattedAddress, phone, website, curren
           handleClose={handleClose}
           data={data}
           name={name}
-          mapsApiKey={mapsApiKey}
         />}
       </div>
     </div>
