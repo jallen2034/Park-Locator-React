@@ -79,7 +79,7 @@ const SimpleDialog = function ({ open, handleClose, data, name, mapsApiKey }) {
               <img
                 className={classes.image}
                 alt="Couldn't fetch pic from Places API :("
-                src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=190&photoreference=${photo.photoref}&key=${mapsApiKey}`}
+                src={`/api/photos/${photo.photoref}`}
               ></img>
             </div>
           ))}
