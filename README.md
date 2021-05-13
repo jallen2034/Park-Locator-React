@@ -4,7 +4,7 @@ Park locator 2.0 is a complete rewrite and rebuild of my previous Park Locator f
 
 ## Tech Stack
 
-JavaScript, React with Material-UI, Google Maps API for JavaScript, Node/Express.js, Firebase Authentication, PostgreSQL, Node.js to script and automate populating my postgres DB using the Google Places API for Node.js.
+JavaScript, React with Material-UI, Google Maps API for JavaScript, Node/Express.js, PostgreSQL, Node.js to script and automate populating my postgres DB using the Google Places API for Node.js.
 
 ## Project goals & changes from Park locator 1.0
 
